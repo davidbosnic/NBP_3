@@ -1,0 +1,48 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.AdministratorRP.AdminHomePageModel
+@section ImeAdmina{
+    @Model.getUserString("emailAdmina")
+}
+@{
+    Layout="_LayoutTest";
+}
+<style>
+    h1{
+        color: #ffc107;
+    }
+    footer{
+        color: #ffc107;
+    }
+</style>
+<div class="container">
+  <div class="table-responsive-xl">
+<input id="ver" type="hidden" asp-for="BrVer">
+<input id="never" type="hidden" asp-for="BrNeVer">
+<input id="adm" type="hidden" asp-for="BrAdmin">
+<input id="kup" type="hidden" asp-for="BrKupaca">
+<h1 style="margin-top:5%;">Ukupan broj administratora: @Model.BrAdmin</h1>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Nalozi', 'Neverifikovani prodavci','Verifikovani prodavci',  'Kupci'],
+          ['Broj naloga', document.getElementById("never").value,document.getElementById("ver").value,  document.getElementById("kup").value]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Graf raspodele naloga po kategorijama',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+    <div id="columnchart_material" style="width: 600px; height: 400px; margin-top:5%;"></div>
+    </div>
+</div>

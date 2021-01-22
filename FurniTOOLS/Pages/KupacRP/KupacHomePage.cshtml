@@ -1,0 +1,49 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.KupacRP.KupacHomePageModel
+@section ImeKupca{
+  @Model.getUserString("imeKupca") @Model.getUserString("prezimeKupca")
+  
+}
+@section MailKupca{
+ @Model.getUserString("emailKupca") 
+}
+@{
+     Layout="_LayoutKupac";
+}
+<div class="container">
+  <div class="table-responsive-xl">
+
+  <h1 style="margin-top: 5%;">
+    Na pravom ste mestu
+  </h1>
+  
+    @* <img src="https://projekatakaunt.blob.core.windows.net/123/ecommerce-application-development.png"> *@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Narudžbenice', 'Grafički prikaz'],
+          ['Isporučeno',     @Model.Isporuceno],
+          ['Potvrđeno',      @Model.Potvrdjeno],
+          ['Naručeno',  @Model.Naruceno],
+          ['Odbijeno', @Model.Odbijeno],
+          ['U korpi',    @Model.Korpa]
+        ]);
+
+        var options = {
+          title: 'Moje narudžbenice',
+          is3D: true,
+          @* chartArea:{left:0,top:0,width:"100%",height:"500px"} *@
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+    <div id="piechart_3d" style="width: 700px; height: 500px; margin-top:5%;"></div>
+  </div>
+</div>
+@* "width: 100%; height: 500px;text-align: center;font-size: xx-large;" *@
+

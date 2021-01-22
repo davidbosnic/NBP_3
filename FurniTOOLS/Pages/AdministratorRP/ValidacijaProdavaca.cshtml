@@ -1,0 +1,31 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.AdministratorRP.ValidacijaProdavacaModel
+@{
+}
+@section ImeAdmina{
+    @Model.getUserString("emailAdmina")
+}
+<form method="POST">
+    <input type="hidden" asp-for="prodavacZaIzmenu.ID">
+    <div  style="text-align: center;">@Model.ErrorMessage</div>
+    <div  style="text-align: center;" asp-validation-summary="All"></div>
+    <label>Ime :</label>
+    <input type="text" asp-for="prodavacZaIzmenu.Ime">
+    <label>Prezime :</label>
+    <input type="text" asp-for="prodavacZaIzmenu.Prezime">
+    <label>Mail :</label>
+    <input type="email" asp-for="prodavacZaIzmenu.Email">
+    <label>Sifra :</label>
+    <input type="hidden" asp-for="prodavacZaIzmenu.Sifra">
+    <label>Broj telefona :</label>
+    <input type="text" asp-for="prodavacZaIzmenu.BrojTelefona">
+    <label>Adresa :</label>
+    <input type="text" asp-for="prodavacZaIzmenu.Adresa">
+    <label>Grad :</label>
+    <input type="text" asp-for="prodavacZaIzmenu.Grad">
+    <label>Firma :</label>
+    <input type="text" asp-for="prodavacZaIzmenu.Firma">
+    <label>Verifikovan :</label>
+    <input type="checkbox" asp-for="prodavacZaIzmenu.Verifikovan">
+    <input class="btn btn-warning" type="submit" value="Izmeni prodavca" asp-page-handler="IzmeniProdavca">
+</form>

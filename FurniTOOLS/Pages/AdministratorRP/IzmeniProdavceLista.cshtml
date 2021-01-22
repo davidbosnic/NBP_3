@@ -1,0 +1,113 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.AdministratorRP.IzmeniProdavceListaModel
+@{
+    Layout="_LayoutTest";
+}
+@section ImeAdmina{
+    @Model.getUserString("emailAdmina")
+}
+<style>
+    .tablica{
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+    h1{
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+</style>
+<style>
+
+.kontejner-flex{
+display :flex;
+
+flex-direction:row;
+
+}
+input[type=range] {
+  width:70%
+}
+</style>
+
+@{
+     var prevDisabled = !Model.Prodavci.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Prodavci.HasNextPage ? "disabled" : "";
+}
+
+
+    <h1>Lista svih profila prodavaca</h1>
+<div class="container-fluid">
+<form method="POST">
+    <span >
+    <a style="margin-top:5px" asp-page="./IzmeniProdavceLista" asp-route-pageIndex="@(Model.Prodavci.PageIndex-1)"
+    class="btn btn-primary @prevDisabled">Prethodna</a>
+    <a style="margin-top:5px" asp-page="./IzmeniProdavceLista" asp-route-pageIndex="@(Model.Prodavci.PageIndex+1)"
+    class="btn btn-primary @nextDisabled">Sledeca</a><br>
+    <span ><input style="padding-top:10px;margin-left:10px;padding-right:10px;margin-top:10px" type="range" class="custom-range" asp-for="pageInput" id="pageInputId" value=@Model.Prodavci.PageIndex  min="1" max=@Model.Prodavci.TotalPages oninput="pageOutputId.value= pageInputId.value "></span>
+    <output style="margin-top:10px" name="pageOutput" id="pageOutputId">@Model.Prodavci.PageIndex</output>
+    @* <a asp-page="./MojiProizvodi" asp-route-pageIndex="pageOutputId.value"
+class="btn btn-primary ">Idi na stranu</a> *@
+    <span><input style="margin-left:10px;margin-top:5px" type="submit" class="btn btn-primary" value="-> Idi na odabranu stranicu" asp-page-handler="IdiNaStranu"></span>
+    <br>
+    <div style="margin-top:10px;margin-bottom:10px">
+        <label>Elemenata po strani:</label>
+        <span><input type="submit" class="@(Model.pageSize==5 ? "btn btn-danger" : "btn btn-primary")" value="5" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=5></span>
+        <span><input type="submit" class="@(Model.pageSize==10 ? "btn btn-danger" : "btn btn-primary")" value="10" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=10></span>
+        <span><input type="submit" class="@(Model.pageSize==15 ? "btn btn-danger" : "btn btn-primary")" value="15" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=15></span>
+        <span><input type="submit" class="@(Model.pageSize==30 ? "btn btn-danger" : "btn btn-primary")" value="30" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=30></span>
+    </div>
+
+    </span>
+</form>  
+</div>   
+  
+    <form method="post">
+@if(Model.Prodavci!=null)
+{
+    <div class="table-responsive-xl">
+    <table class="table tablica">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Broj telefona</th>
+                <th>Email</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Grad</th>
+                <th>Firma</th>
+                <th colspan="1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prodavac in @Model.Prodavci)
+            {
+                <tr>
+                    <td>@prodavac.ID</td>
+                    <td>@prodavac.BrojTelefona</td>
+                    <td>@prodavac.Email</td>
+                    <td>@prodavac.Ime</td>
+                    <td>@prodavac.Prezime</td>
+                    <td>@prodavac.Grad</td>
+                    <td>@prodavac.Firma</td>
+                    <td>
+                        <button class="btn btn-warning" type= "submit" asp-page="./IzmeniProdavca" asp-route-id="@prodavac.ID">Edituj</button>
+                        
+                    </td>
+                    <td>
+                        <button  class="btn btn-warning"type="submit" asp-page-handler="ObrisiProdavca" asp-route-id="@prodavac.ID">Obrisi</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <div class="container-fluid">
+    <div >
+            <a style="margin-top:10px" asp-page="./IzmeniProdavceLista" asp-route-pageIndex="@(Model.Prodavci.PageIndex-1)"
+            class="btn btn-primary @prevDisabled">Prethodna</a>
+            <a style="margin-top:10px" asp-page="./IzmeniProdavceLista" asp-route-pageIndex="@(Model.Prodavci.PageIndex+1)"
+            class="btn btn-primary @nextDisabled">Sledeca</a>
+    </div>
+    </div>
+}
+</form>

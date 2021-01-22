@@ -1,0 +1,48 @@
+@page
+@model WEBFurniTOOLS.Pages.ProdavacRP.ProdavacPromenaSifreModel
+@{
+    Layout="_LayoutProdavac";
+}
+@section ImeProdavca{
+  @Model.getUserString("imeProdavca") @Model.getUserString("prezimeProdavca") 
+}
+@section MailProdavca{
+
+  @Model.getUserString("emailProdavca") 
+}
+
+<form method="post">
+    <input type="hidden" asp-for="prodavacZaIzmenu.ID">   
+    <div class="container">
+            <h1>Promena šifre</h1>
+     
+     <div></div> 
+
+   
+    <div>@Model.ErrorMessage</div>
+
+    <div style="margin-top: 10px" class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic1">Trenutna šifra : </span>
+        </div>
+        <input type="password" class="form-control" asp-for="staraSifra"  aria-describedby="basic1">
+    </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic2">Nova šifra : </span>
+        </div>
+        <input type="password" class="form-control" asp-for="novaSifra"  aria-describedby="basic2">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic3">Ponovite šifru : </span>
+        </div>
+        <input type="password" class="form-control" asp-for="novaSifraPonovo"  aria-describedby="basic3">
+    </div>
+    <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Izmeni" asp-page-handler="Izmeni">
+
+    </div>
+    
+</form>

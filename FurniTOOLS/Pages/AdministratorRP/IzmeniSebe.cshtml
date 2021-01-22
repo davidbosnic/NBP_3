@@ -1,0 +1,63 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.AdministratorRP.IzmeniSebeModel
+@section ImeAdmina{
+    @Model.getUserString("emailAdmina")
+}
+@{
+    Layout="_LayoutTest";
+}
+<style>
+        h1{
+        margin-top: 5%;
+    }
+</style>
+
+<form method="POST">
+    <div class="container">
+    <h1>Moj profil</h1>
+    <div  id="sakriven" asp-validation-summary="All"></div>
+    <div  >@Model.ErrorMessage</div>
+    
+    @* <div style="margin-left: 40%;margin-top:5%;">    <label>Email :</label>
+    <input type="email" asp-for="Admin.Mail">
+    <label>Šifra :</label>
+    <input type="password" asp-for="Admin.Sifra">
+     *@
+        <input type="hidden" class="form-control" asp-for="Admin.ID"  aria-describedby="basic3" >
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic3">Email : </span>
+        </div>
+        <input type="email" class="form-control" asp-for="Admin.Mail"  aria-describedby="basic3" >
+    </div>
+    <br>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic3">Ime : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="Admin.Ime"  aria-describedby="basic3" >
+    </div>
+    <br>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic3">Prezime : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="Admin.Prezime"  aria-describedby="basic3" >
+    </div>
+    <br>
+
+        <input type="hidden" class="form-control" asp-for="Admin.Sifra"  aria-describedby="basic3" >
+
+
+    <input style="float: right;" class="btn btn-warning" type="submit" value="Izmeni" asp-page-handler="IzmeniSe">
+
+    </div>
+</form>
+    @if(@Model.Ucitano==false)
+    {
+    <script>
+        var nesto = document.getElementById("sakriven");
+        nesto.innerText="";
+    </script>
+    Model.Ucitano=true;
+    }

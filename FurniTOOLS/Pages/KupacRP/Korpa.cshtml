@@ -1,0 +1,77 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.KupacRP.KorpaModel
+@section ImeKupca{
+  @Model.getUserString("imeKupca") @Model.getUserString("prezimeKupca")
+  
+}
+@section MailKupca{
+ @Model.getUserString("emailKupca") 
+}
+@{
+     Layout="_LayoutKupac";
+}
+<form method="POST">
+@if(Model.narudzbine!=null)
+{
+  <div class="table-responsive-xl">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ime proizvoda</th>
+                <th>Datum naručivanja</th>
+                <th>Količina</th>
+                <th>Cena</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.narudzbine)
+            {
+                <tr>
+                    <td>@item.NarucenProizvod_.Naziv</td>
+                    <td>@item.VremeNarucivanja</td>
+                    <td>@item.Kolicina</td>
+                    <td>@item.CenaBato()€</td>
+                    <td><input class="btn btn-warning" asp-route-id="@item.ID" type="submit" value="Izbaci" asp-page-handler="Izbaci"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    if(Model.narudzbine.Count==0)
+    {
+        <br>
+        <br>
+        <h2 style="margin-left: 5%;">Korpa je trenutno prazna</h2>
+    }
+    else{
+        <br>
+              <hr class="sidebar-divider d-none d-md-block">
+        <br>
+        <div style="float: right;margin-right: 50px;">
+            <h2>Ukupno: @Model.ukupno()€</h2>
+            <a style="width: 100%;color: white;" class="btn btn-warning" type="submit" data-toggle="modal" data-target="#logoutModal1">Kupi</a>
+        </div>
+
+    }
+
+}
+  <div class="modal fade" id="logoutModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Stvarno želite da se obavite ovu kupovinu?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Pritisnite dugme Kupi ako ste sigurni da želite da obavite ovu transakciju!</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Otkazi</button>
+          <input class="btn btn-primary" type="submit" asp-page-handler="Kupi" value="Kupi">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

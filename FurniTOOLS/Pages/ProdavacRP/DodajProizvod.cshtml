@@ -1,0 +1,115 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.ProdavacRP.DodajProizvodModel
+@{
+    Layout="_LayoutProdavac";
+}
+@section ImeProdavca{
+  @Model.getUserString("imeProdavca") @Model.getUserString("prezimeProdavca") 
+}
+@section MailProdavca{
+
+  @Model.getUserString("emailProdavca") 
+}
+<style>
+        h1{
+        @* margin-left: 40%; *@
+        margin-top: 5%;
+    }
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<form method="POST" enctype = "multipart/form-data">
+    <input type="hidden" asp-for="noviProizvod.ID">
+    
+    <div class="container">
+        <h1>Novi proizvod</h1>
+    <div>@Model.ErrorMessage1</div>
+    <div>@Model.ErrorMessage2</div>
+    <input type="hidden" asp-for="idProdavac">
+
+    <div style="margin-top: 10px" class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic1">Naziv : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="noviProizvod.Naziv"  aria-describedby="basic1">
+    </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic2">Šifra proizvoda : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="noviProizvod.Sifra"  aria-describedby="basic2">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic3">Površina pod stofom : </span>
+        </div>
+        <input  class="form-control" step="any" type="number" min="0" asp-for="noviProizvod.PovrsinaMaterijala" aria-describedby="basic3">
+    </div>
+
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic4">Visina baze : </span>
+        </div>
+        <input type="number" min="0" class="form-control" asp-for="noviProizvod.VisinaBaze"  aria-describedby="basic4">
+    </div>
+
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic5">Visina naslona : </span>
+        </div>
+        <input type="number" min="0" class="form-control" asp-for="noviProizvod.VisinaNaslona" aria-describedby="basic5">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic6">Cena po komadu : </span>
+        </div>
+        <input type="number" min="0" class="form-control" asp-for="noviProizvod.CenaPoKomadu" aria-describedby="basic6">
+    </div>
+
+    <div class="input-group mb-3">
+        <div style="height: 38px;" class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Slika proizvoda : </span>
+        </div>
+        <div class="custom-file">
+            <input type="file" asp-for="Slika" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputGroupFile01">Odaberite fajl</label>
+        </div>
+    </div>
+    <script>
+            $('#inputGroupFile01').on('change',function(){
+                //get the file name
+                var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        </script>
+    
+
+    @* <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic7">Slika proizvoda : </span>
+        </div>
+        <input type="file" asp-for="Slika" id="r1" class="form-control" aria-describedby="basic7">
+    </div>   *@
+    <input class="btn btn-warning" type="hidden" asp-for=nebitno value="bezveze"> 
+    <input class="btn btn-warning" style="margin-top: 10px;float: right;" class="btn btn-warning" type="submit" asp-page-handler="Dodaj" value="Dodaj proizvod">  
+    </div>
+    @* </div> *@
+</form>
+
+    @if(@Model.Ucitano==false)
+    {
+    <script>
+        var nesto = document.getElementById("sakriven");
+        nesto.innerText="";
+    </script>
+    Model.Ucitano=true;
+    }
+    

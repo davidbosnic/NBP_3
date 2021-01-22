@@ -1,0 +1,21 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.ProdavacRP.ProdavacHomePageModel
+@{
+    Layout="_LayoutProdavac";
+}
+@section ImeProdavca{
+  @Model.getUserString("imeProdavca") @Model.getUserString("prezimeProdavca") 
+}
+@section MailProdavca{
+
+  @Model.getUserString("emailProdavca") 
+}
+<div style="display: flex;flex-direction: column;margin-top: 5%;">
+  <div style="text-align: center;font-size: xx-large;">
+    Izgradimo naš sajt zajedno!
+  </div>
+  <div style="text-align: center;">
+    @* <img src="https://projekatakaunt.blob.core.windows.net/123/sell-online-hero.png" height="400"> *@
+    <img src="https://projekatakaunt.blob.core.windows.net/123/sell-online-hero.png" class="img-fluid" alt="Responsive image">
+  </div>
+</div>

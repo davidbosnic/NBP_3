@@ -1,0 +1,89 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.KupacRP.IzmeniSebeModel
+@section ImeKupca{
+  @Model.getUserString("imeKupca") @Model.getUserString("prezimeKupca")
+  
+}
+@section MailKupca{
+ @Model.getUserString("emailKupca") 
+}
+@{
+     Layout="_LayoutKupac";
+}
+<style>
+        h1{
+        @* margin-left: 40%; *@
+        margin-top: 5%;
+    }
+</style>
+<form method="post">
+    <input type="hidden" asp-for="kupacZaIzmenu.ID">   
+    <div class="container">
+            <h1>Moj profil</h1>
+     
+     <div></div> 
+
+    <div id="sakriven" asp-validation-summary="All"></div>
+    <div>@Model.ErrorMessage</div>  
+
+    <div style="margin-top: 10px" class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic1">Ime : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="kupacZaIzmenu.Ime"  aria-describedby="basic1">
+    </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic2">Prezime : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="kupacZaIzmenu.Prezime"  aria-describedby="basic2">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic3">Email : </span>
+        </div>
+        <input type="email" class="form-control" asp-for="kupacZaIzmenu.Email"  aria-describedby="basic3">
+    </div>
+
+    <input style="float: right;"  type="hidden" asp-for="kupacZaIzmenu.Sifra">
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic4">Broj telefona :</span>
+        </div>
+        <input type="text" class="form-control" asp-for="kupacZaIzmenu.BrojTelefona"  aria-describedby="basic4" >
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic5">Adresa : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="kupacZaIzmenu.Adresa"  aria-describedby="basic5" >
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic6">Grad : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="kupacZaIzmenu.Grad" aria-describedby="basic6">
+    </div>
+
+  <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Izmenite vase podatke" asp-page-handler="Izmeni">
+
+    </div>
+
+      
+
+
+    @if(@Model.Ucitano==false)
+    {
+    <script>
+        var nesto = document.getElementById("sakriven");
+        nesto.innerText="";
+    </script>
+    Model.Ucitano=true;
+    }
+
+</form>

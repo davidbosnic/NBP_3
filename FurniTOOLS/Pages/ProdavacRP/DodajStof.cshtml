@@ -1,0 +1,105 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.ProdavacRP.DodajStofModel
+@{
+    Layout="_LayoutProdavac";
+}
+@section ImeProdavca{
+  @Model.getUserString("imeProdavca") @Model.getUserString("prezimeProdavca") 
+}
+@section MailProdavca{
+
+  @Model.getUserString("emailProdavca") 
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+<div class="container">
+    <div id="sakriven" asp-validation-summary="All"></div>
+    <div >@Model.ErrorMessage1</div>
+    <div >@Model.ErrorMessage2</div>
+    <div >@Model.ErrorMessage3</div>
+    <form method="post" enctype = "multipart/form-data">
+        @* <label style="float: right;margin-top: 10px;" >Broj tipova novog stofa :</label>
+        <input style="float: right;margin-top: 10px;" min="1" type="number" asp-for="brojTipova">
+        <button style="float: right;margin-top: 10px;" type="submit" class="btn btn-warning" asp-page-handler="Primeni">Primeni</button> *@
+    
+    <div style="margin-top: 10px"  class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="bas">Broj tipova novog stofa : </span>
+        </div>
+        <input min="1" type="number" asp-for="brojTipova" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" asp-page-handler="Primeni">Primeni</button>
+        </div>
+    </div>
+    </form>
+
+<form method="POST" enctype = "multipart/form-data">
+    @if(@Model.brojTipova!=null)
+    {
+
+        @* <label style="float: right;margin-top: 10px;">Naziv štofa :</label>
+        <input  style="float: right;margin-top: 10px;"type="text" asp-for="stofZaDodavanje.Naziv">
+        <label style="float: right;margin-top: 10px;">Cena po metru kvadratnom :</label>
+        <input style="float: right;margin-top: 10px;" type="number" asp-for="stofZaDodavanje.CenaPoMetruKvadratnom">
+        <label style="float: right;margin-top: 10px;">Slika :</label>
+        <input style="float: right;margin-top: 10px;" class="btn btn-warning" type="file" asp-for="SlikaStofa"> *@
+
+        <div style="margin-top: 10px" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic1">Naziv štofa : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="stofZaDodavanje.Naziv"  aria-describedby="basic1">
+        </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic2">Cena po metru kvadratnom :</span>
+        </div>
+        <input class="form-control" type="number" asp-for="stofZaDodavanje.CenaPoMetruKvadratnom"  aria-describedby="basic2">
+    </div>
+
+    <div class="input-group mb-3">
+        <div style="height: 38px;" class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Slika : </span>
+        </div>
+        <div class="custom-file">
+            <input type="file" asp-for="SlikaStofa" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputGroupFile01">Odaberite fajl</label>
+        </div>
+    </div>
+    <script>
+            $('#inputGroupFile01').on('change',function(){
+                //get the file name
+                var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        </script>
+
+
+        <label>Unesite sve tipove novog štofa :</label>
+        @for(var i=0;i<=@Model.brojTipova-1;i++)
+        {
+            @* <input style="float: right;margin-top: 10px;" type="text" asp-for="tipoviZaDodavanje[i].SifraStofa"> *@
+
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" asp-for="tipoviZaDodavanje[i].SifraStofa" >
+            </div>
+        }
+        <button style="float: right;margin-top: 10px;" class="btn btn-warning" type="submit" asp-page-handler="Dodaj">Dodaj štof</button>
+     
+    }
+</form>
+</div>
+    @if(@Model.Ucitano==false)
+    {
+    <script>
+        var nesto = document.getElementById("sakriven");
+        nesto.innerText="";
+    </script>
+    Model.Ucitano=true;
+    }

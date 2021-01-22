@@ -1,0 +1,106 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.ProdavacRP.MojiProizvodiModel
+@section ImeProdavca{
+  @Model.getUserString("imeProdavca") @Model.getUserString("prezimeProdavca") 
+}
+@section MailProdavca{
+
+  @Model.getUserString("emailProdavca") 
+}
+@{
+        Layout="_LayoutProdavac";
+        /*<div class="col-sm-4">
+                     <div class="panel panel-primary">
+                        <div class="panel-body"><img src="@proizvod.URLSlike" class="img-responsive" style="width:100%" alt="Image"></div>
+                    </div>
+                </div>    */
+        //style="display: flex;flex-direction: column;margin-left: 20px;justify-content: center;"
+        //<div max-height=400px max-width=200px style="display: flex;flex-direction: column;margin-left: 20px;justify-content: center;"><img src="@proizvod.URLSlike" style="max-height: 100%; max-width: 100%;display : block;margin: auto;" ></div> 
+}
+<style>
+        h1{
+        margin-left: 40%;
+        margin-top: 5%;
+    }
+.kontejner-flex{
+display :flex;
+
+flex-direction:row;
+
+}
+input[type=range] {
+  width:70%
+}
+</style>
+<h1>Lista proizvoda</h1>
+@{
+     var prevDisabled = !Model.MojiProizvodi.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.MojiProizvodi.HasNextPage ? "disabled" : "";
+}
+
+@if (@Model.MojiProizvodi!=null)
+{
+<div class="container-fluid">
+<form method="POST" style="margin-left:10px;">
+    <span >
+    <a style="margin-top:5px" asp-page="./MojiProizvodi" asp-route-pageIndex="@(Model.MojiProizvodi.PageIndex-1)"
+    class="btn btn-primary @prevDisabled">Prethodna</a>
+    <a style="margin-top:5px" asp-page="./MojiProizvodi" asp-route-pageIndex="@(Model.MojiProizvodi.PageIndex+1)"
+    class="btn btn-primary @nextDisabled">Sledeca</a><br>
+    <span ><input style="padding-top:10px;margin-left:10px;padding-right:10px;margin-top:10px" type="range" class="custom-range" asp-for="pageInput" id="pageInputId" value=@Model.MojiProizvodi.PageIndex  min="1" max=@Model.MojiProizvodi.TotalPages oninput="pageOutputId.value= pageInputId.value "></span>
+    <output style="margin-top:10px" name="pageOutput" id="pageOutputId">@Model.MojiProizvodi.PageIndex</output>
+    @* <a asp-page="./MojiProizvodi" asp-route-pageIndex="pageOutputId.value"
+class="btn btn-primary ">Idi na stranu</a> *@
+    <span><input style="margin-left:10px;margin-top:5px" type="submit" class="btn btn-primary" value="-> Idi na odabranu stranicu" asp-page-handler="IdiNaStranu"></span>
+    <br>
+    <div style="margin-top:10px;margin-bottom:10px">
+        <label>Elemenata po strani:</label>
+        <span><input type="submit" class="@(Model.pageSize==5 ? "btn btn-danger" : "btn btn-primary")" value="5" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=5></span>
+        <span><input type="submit" class="@(Model.pageSize==10 ? "btn btn-danger" : "btn btn-primary")" value="10" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=10></span>
+        <span><input type="submit" class="@(Model.pageSize==15 ? "btn btn-danger" : "btn btn-primary")" value="15" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=15></span>
+        <span><input type="submit" class="@(Model.pageSize==30 ? "btn btn-danger" : "btn btn-primary")" value="30" asp-page-handler="BrojElemenataNaStrani" asp-route-brEl=30></span>
+    </div>
+
+    </span>
+</form> 
+</div>
+    <form method="POST">
+
+        @foreach (var proizvod in @Model.MojiProizvodi)
+        {
+            <hr class="sidebar-divider d-none d-md-block">
+            <div style="display: flex;flex-direction: row;justify-content: center;">
+                <div class="col-sm-4">
+                     <div class="panel panel-primary">
+                        <div class="panel-body"><img src="@proizvod.URLSlike" class="img-responsive" style="width:100%;" alt="Image"></div>
+                    </div>
+                </div>          
+                <div style="display: flex;flex-direction: column;margin-left: 20px;">
+                    <div style="font-size: large;margin-top: 20px;">Naziv: @proizvod.Naziv</div>
+                    <div style="font-size: large;margin-top: 20px;">Cena: @proizvod.CenaPoKomadu€</div>
+                    <div style="font-size: large;margin-top: 20px;">Šifra proizvoda: @proizvod.Sifra</div>
+                    <div style="font-size: large;margin-top: 20px;">Površina pod materijalom: @proizvod.PovrsinaMaterijala m<sup>2</sup></div>
+                    <button style="margin-top: 20px;" class="btn btn-warning" type="submit" asp-page="./IzmeniProizvod" asp-route-id="@proizvod.ID">Izmeni</button>
+                    <button style="margin-top: 20px;" class="btn btn-warning" asp-page-handler="ObrisiProizvod" asp-route-id="@proizvod.ID" type="submit">Obrisi</button>
+                </div>
+
+            </div>
+            
+        }
+        <hr class="sidebar-divider d-none d-md-block">
+    <div class="container-fluid">
+    <div>
+            <a style="margin-top:10px" asp-page="./MojiProizvodi" asp-route-pageIndex="@(Model.MojiProizvodi.PageIndex-1)"
+            class="btn btn-primary @prevDisabled">Prethodna</a>
+            <a style="margin-top:10px" asp-page="./MojiProizvodi" asp-route-pageIndex="@(Model.MojiProizvodi.PageIndex+1)"
+            class="btn btn-primary @nextDisabled">Sledeca</a>
+    </div>   
+    </div>
+</form>
+}
+
+
+
+
+
+

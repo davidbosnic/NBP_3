@@ -1,0 +1,119 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.AdministratorRP.IzmeniProdavcaModel
+@section ImeAdmina{
+    @Model.getUserString("emailAdmina")
+}
+@{
+    Layout="_LayoutTest";
+}
+<style>
+.divce
+{
+    padding-bottom: 26px;
+    padding-right: 10px;
+}
+.divce2{
+        padding-bottom: 20px;
+}
+</style>
+<form  method="POST">
+    @* <input type="hidden" asp-for="prodavacZaIzmenu.ID">
+    <div   style="text-align: center;"id="sakriven" asp-validation-summary="All"></div>
+    <div  style="text-align: center;">@Model.ErrorMessage</div>
+    <div style="display: flex;">
+        <div><div class="divce">Ime :</div><div class="divce">Prezime :</div><div class="divce">Email :</div><div class="divce">Broj telefona :</div><div class="divce">Adresa :</div><div class="divce">Grad :</div><div class="divce">Firma :</div></div>
+        <div>
+            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Ime"></div>
+            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Prezime"></div>    
+            <div class="divce2"><input type="mail" asp-for="prodavacZaIzmenu.Email"></div>  
+            <div class="divce2"><input type="tel" asp-for="prodavacZaIzmenu.BrojTelefona"></div>    
+            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Adresa"></div>
+            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Grad"></div>
+            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Firma"></div>
+            <div class="divce2"><input type="hidden" asp-for="prodavacZaIzmenu.Sifra"></div>  
+        </div> 
+   </div> 
+   <input class="btn btn-warning" type="submit" value="Izmeni prodavca" asp-page-handler="Izmeni"> *@
+
+    <div class="container">
+            <h1>Profil prodavca za izmenu</h1>
+     
+     <div></div> 
+
+
+    <div id="sakriven" asp-validation-summary="All"></div>
+    <div >@Model.ErrorMessage</div>
+    <input type="hidden" asp-for="prodavacZaIzmenu.ID">
+    <div style="margin-top: 10px" class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic1">Ime : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Ime"  aria-describedby="basic1">
+    </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic2">Prezime : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Prezime"  aria-describedby="basic2">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic3">Email : </span>
+        </div>
+        <input type="email" class="form-control" asp-for="prodavacZaIzmenu.Email"  aria-describedby="basic3" >
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic4">Broj telefona :</span>
+        </div>
+        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.BrojTelefona"  aria-describedby="basic4" >
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic5">Adresa : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Adresa"  aria-describedby="basic5" >
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic6">Grad : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Grad" aria-describedby="basic6">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic7">Firma : </span>
+        </div>
+        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Firma" aria-describedby="basic7">
+    </div>
+
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic777">Promeni verifikovanost naloga </span>
+        </div>
+        <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="prodavacZaIzmenu.Verifikovan" aria-describedby="basic777">
+    </div>
+
+    <div><input type="hidden" asp-for="prodavacZaIzmenu.Sifra"></div>
+    @* <div><input type="hidden" asp-for="prodavacZaIzmenu.Verifikovan"></div> *@
+
+  <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Izmeni prodavca" asp-page-handler="Izmeni">
+
+    </div>
+
+</form>
+    @if(@Model.Ucitano==false)
+    {
+    <script>
+        var nesto = document.getElementById("sakriven");
+        nesto.innerText="";
+    </script>
+    Model.Ucitano=true;
+    }

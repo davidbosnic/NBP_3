@@ -1,0 +1,579 @@
+﻿@page
+@model WEBFurniTOOLS.SigninModel
+@{
+  Layout="_LayoutGlavna";
+}
+@* <style>
+input {
+  ::-webkit-input-placeholder {
+     color: rgba(255,255,255,0.7);
+  }
+  ::-moz-placeholder {
+     color: rgba(255,255,255,0.7);  
+  }
+  :-ms-input-placeholder {  
+     color: rgba(255,255,255,0.7);  
+  }
+  &:focus {
+    outline: 0 transparent solid;
+    ::-webkit-input-placeholder {
+     color: rgba(0,0,0,0.7);
+    }
+    ::-moz-placeholder {
+       color: rgba(0,0,0,0.7);  
+    }
+    :-ms-input-placeholder {  
+       color: rgba(0,0,0,0.7);  
+    }
+  }
+}
+
+.login-form {
+  margin-top: 5%;
+  height: 550px;
+  width: 30%;
+  opacity: 0.9;
+  background: #333;
+  margin-left: 35%;
+  max-width: 50%;
+  border-radius: 5%;
+}
+.login-text {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  max-width: 50%;
+  padding: .5rem;
+  text-align: center;
+  .fa-stack-1x {
+    color: black;
+  }
+}
+
+.login-username, .login-password {
+  background: transparent;
+  border: 0 solid;
+  border-bottom: 1px solid rgba(white, .5);
+  color: white;
+  display: block;
+  margin: 1rem;
+  padding: .5rem;
+  width: calc(100% - 20px);
+}
+
+.login-forgot-pass {
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 75%;
+  left: 0;
+  opacity: 0.6;
+  padding: .5rem;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  &:hover {
+    opacity: 1;
+  }
+
+  
+}
+.items{
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h2
+{
+    text-align: center;
+    color: whitesmoke;
+}
+h4{
+    color: whitesmoke;
+    text-align: center;
+}
+.login-submit:hover{
+    background-color: gray;
+    color: honeydew;
+}
+.login-submit {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  display: block;
+  margin: 1rem auto;
+  min-width: 1px;
+  padding: 10px;
+  font-size: large;
+  border-radius: 30%;
+}
+.message{
+  color: antiquewhite;
+  text-align: center;
+}
+</style>
+<form id="signup" method="POST" class="login-form">
+  <br>
+  <h2 >
+      Sign up
+  </h2>
+  <h4>
+      Izaberite tip naloga
+  </h4>
+  <div id="items" class="items" >
+      <input name="Type" type="radio" id="rb1" value="1">Kupac
+      <input name="Type" type="radio" id="rb2" value="2">Prodavac
+  </div>
+    <input type="hidden" asp-for="KorisnikID">
+    <div asp-validation-summary="All"></div>
+    <div id="kontejner">
+        <input type="text" class="login-username"  placeholder="Ime" asp-for="Prodavac.Ime"/>
+        <input type="text" class="login-username"  placeholder="Prezime" asp-for="Prodavac.Prezime"/>
+        <input type="email" class="login-username" autofocus="true"  placeholder="Email" asp-for="Prodavac.Email"/>
+        <input type="password" class="login-password"  placeholder="Password" asp-for="Prodavac.Sifra"/>
+        <input type="text" class="login-username"  placeholder="Grad" asp-for="Prodavac.Grad"/>
+        <input type="tel" class="login-username"  placeholder="Telefon" asp-for="Prodavac.BrojTelefona"/>
+        <input type="text" class="login-username" placeholder="Adresa" asp-for="Prodavac.Adresa"/>
+        <input type="hidden" id="firma" class="login-username" value="   " placeholder="Firma" asp-for="Prodavac.Firma"/>
+        <input type="submit" name="Login" value="Login" id="button1" class="login-submit" asp-page-handler="Signup"/>
+    </div>
+  <div>@Model.ErrorMessage</div>
+  <br>
+   <script>
+    var forma = document.getElementById("signup");
+    var div = document.getElementById("kontejner");
+    forma.style.height=550;
+    var rb = document.getElementById("rb2");
+    var firma = document.getElementById("firma");
+    rb.addEventListener('change', function() {
+      if(rb.checked)
+        firma.type="text";
+        forma.style.height="600px";
+        firma.style.placeholder="Firma";
+      });
+    var rb2 = document.getElementById("rb1");
+          rb2.addEventListener('change', function() {
+      if(rb2.checked)
+        firma.type="hidden";
+        forma.style.height="550px";
+      });
+  </script> 
+  @* <a href="#" class="login-forgot-pass">Forgot password?</a> 
+</form> *@
+<style>
+  .txt1 {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #999999;
+  line-height: 1.5;
+}
+
+.txt2 {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-login100 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #fff;  
+}
+
+.wrap-login100 {
+  width: 390px;
+  background: #fff;
+}
+
+
+/*------------------------------------------------------------------
+[ Form ]*/
+
+.login100-form {
+  width: 100%;
+}
+
+.login100-form-title {
+  display: block;
+  font-family: Poppins-Bold;
+  font-size: 39px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.login100-form-avatar {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.login100-form-avatar img {
+  width: 100%;
+}
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.input100 {
+  font-family: Poppins-SemiBold;
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 52px;
+  background: transparent;
+  padding: 0 5px;
+}
+
+/*---------------------------------------------*/ 
+.input100 {
+  font-family: Poppins-SemiBold;
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 52px;
+  background: transparent;
+  padding: 0 5px;
+}
+
+/*---------------------------------------------*/ 
+.focus-input100 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: -20;
+  left: 0;
+  pointer-events: none;
+    font-size: 15px;
+}
+
+.focus-input100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  font-size: 15px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  background: #6D2543;
+}
+
+.focus-input100::after {
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  color: #999999;
+  line-height: 1.2;
+
+  content: attr(data-placeholder);
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  padding-left: 5px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login100-form-btnd {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login100-form-btnd {
+  font-family: Poppins-Medium;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  background-color: #6D2543;
+  border-radius: 25px;
+
+  box-shadow: 0 10px 30px 0px rgba(109, 37, 67, 0.5);
+  -moz-box-shadow: 0 10px 30px 0px rgba(109, 37, 67, 0.5);
+  -webkit-box-shadow: 0 10px 30px 0px rgba(109, 37, 67, 0.5);
+  -o-box-shadow: 0 10px 30px 0px rgba(109, 37, 67, 0.5);
+  -ms-box-shadow: 0 10px 30px 0px rgba(109, 37, 67, 0.5);
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btnd:hover {
+  background-color: #333333;
+  box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+  -moz-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+  -webkit-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+  -o-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+  -ms-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+}
+
+
+
+/*------------------------------------------------------------------
+[ Alert validate ]*/
+
+.validate-input {
+  position: relative;
+}
+
+.alert-validate::before {
+  content: attr(data-validate);
+  position: absolute;
+  max-width: 70%;
+  background-color: #fff;
+  border: 1px solid #c80000;
+  border-radius: 2px;
+  padding: 4px 25px 4px 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 0px;
+  pointer-events: none;
+
+  font-family: Poppins-Regular;
+  color: #c80000;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+
+  visibility: hidden;
+  opacity: 0;
+
+  -webkit-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.alert-validate::after {
+  content: "\f06a";
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #c80000;
+
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 5px;
+}
+
+.alert-validate:hover:before {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.login-more li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.login-more li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  top: 45%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
+}
+</style>
+<form method="POST">
+  	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form method="POST">  
+          <input type="hidden" asp-for="KorisnikID">
+					<span class="login100-form-title p-b-70">
+						Dobrodošli
+					</span>
+					<span class="login100-form-avatar">
+						<img src="images/login.png" width="100" height="120">
+					</span>
+          <br>
+          <div>@Model.ErrorMessage</div>
+          <div asp-validation-summary="All"></div> 
+          <br>
+          <div style="text-align: center;justify-items: center;align-items: center;">
+          <h3 style="text-align: center;">Unesite tip naloga</h3><br>
+          @* <div style="text-align: center;" id="items" class="items" >
+              <input name="Type" type="radio" id="rb1" value="1">Kupac
+              <input name="Type" type="radio" id="rb2" value="2">Prodavac
+          </div> *@
+            <div style="text-align: center;justify-items: center;align-items: center;" class="btn-group btn-group-toggle">
+              <label id="labeloption1" class="btn btn-secondary active">
+                <input type="radio" name="Type" id="option1" value="1" autocomplete="off" checked> Kupac
+              </label>
+              <label id="labeloption2" class="btn btn-secondary">
+                <input type="radio" name="Type" id="option2" value="2" autocomplete="off"> Prodavac
+              </label>
+            </div>
+          </div>
+
+					<div class="wrap-input100 m-t-85 m-b-35">
+						<input class="input100" type="text" asp-for="Prodavac.Ime">
+						<span class="focus-input100" data-placeholder="Ime"></span>
+					</div>
+
+					<div class="wrap-input100 m-b-50" >
+						<input class="input100" type="text"asp-for="Prodavac.Prezime">
+						<span class="focus-input100" data-placeholder="Prezime"></span>
+					</div>
+
+					<div class="wrap-input100 m-b-50" >
+						<input class="input100" type="email" asp-for="Prodavac.Email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+
+
+					<div class="wrap-input100 m-b-50" >
+						<input class="input100" type="password" asp-for="Prodavac.Sifra">
+						<span class="focus-input100" data-placeholder="Šifra"></span>
+					</div>
+
+					<div class="wrap-input100 m-b-50" >
+						<input class="input100" type="text" asp-for="Prodavac.Grad">
+						<span class="focus-input100" data-placeholder="Grad"></span>
+					</div>
+
+					<div class="wrap-input100 m-b-50" >
+						<input class="input100" type="tel" asp-for="Prodavac.BrojTelefona">
+						<span class="focus-input100" data-placeholder="Broj telefona"></span>
+					</div>
+
+					<div class="wrap-input100 m-b-50" >
+						<input class="input100" type="text" asp-for="Prodavac.Adresa">
+						<span class="focus-input100" data-placeholder="Adresa"></span>
+					</div>
+
+					<div  id="firma"  class="wrap-input100 validate-input m-b-50" >
+						<input  class="input100" type="text" asp-for="Prodavac.Firma">
+						<span  class="focus-input100" data-placeholder="Firma"></span>
+					</div>
+
+					<div class="container-login100-form-btnd">
+						<button type="submit" class="login100-form-btnd" asp-page-handler="Signup">
+							Registruj se
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+  <br>
+	<script>
+    var rb = document.getElementById("option2");
+    var lb = document.getElementById("labeloption2");
+    var lb2 = document.getElementById("labeloption1");
+    var firma = document.getElementById("firma");
+    rb.addEventListener('change', function() {
+      if(rb.checked)
+        firma.style.display="flex";
+        lb.className="btn btn-secondary active";
+        lb2.className="btn btn-secondary";
+      });
+    var rb2 = document.getElementById("option1");
+          rb2.addEventListener('change', function() {
+      if(rb2.checked)
+        firma.style.display="none";
+        lb2.className="btn btn-secondary active";
+        lb.className="btn btn-secondary";
+      });
+      firma.style.display="none";
+  </script>
+
+	<div id="dropDownSelect1"></div>
+	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="js/main.js"></script>
+</form>

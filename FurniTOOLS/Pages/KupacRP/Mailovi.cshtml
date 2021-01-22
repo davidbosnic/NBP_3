@@ -1,0 +1,72 @@
+﻿@page
+@model WEBFurniTOOLS.Pages.KupacRP.MailoviModel
+@section ImeKupca{
+  @Model.getUserString("imeKupca") @Model.getUserString("prezimeKupca")
+  
+}
+@section MailKupca{
+ @Model.getUserString("emailKupca") 
+}
+@{
+     Layout="_LayoutKupac";
+}
+<section>
+  <div class="square_box box_three"></div>
+  <div class="square_box box_four"></div>
+  <div class="container mt-5">
+    <div class="row">
+
+      @foreach (var item in @Model.Narudzbine)
+      {
+        @if (item.Procitana==false)
+        {
+            
+          <form method="POST">
+            @if (item.Status=="Potvrdjeno")
+              {
+                <div class="col-sm-12">
+                <div class="alert fade alert-simple alert-primary alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                  <i class="start-icon fa fa-thumbs-up faa-bounce animated"></i>
+                  <strong class="font__weight-semibold">Potvrda!</strong> Vaš proizvod (@item.NarucenProizvod_.Naziv) naručen @item.VremeNarucivanja je u fazi izrade.
+                  <input type="submit" class="btn btn-primary" asp-route-id="@item.ID"  asp-page-handler="Obrisi" value="Obrisi">
+                  </div>
+              </div>
+
+              }
+              @if (item.Status=="Isporuceno")
+              {
+              <div class="col-sm-12">
+                <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                  <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                  <strong class="font__weight-semibold">Isporuka!</strong> Vaš proizvod (@item.NarucenProizvod_.Naziv) naručen @item.VremeNarucivanja je poslat na adresu "@item.ProfilKorisnika_.Adresa". Očekujte isporuku u narednim danima.
+                 <input class="btn btn-success" type="submit" asp-route-id="@item.ID"  asp-page-handler="Obrisi" value="Obrisi">
+                </div>
+              </div>
+              }
+              @if (item.Status=="Odbijeno")
+              {
+              <div class="col-sm-12">
+                <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                  <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+                  <strong class="font__weight-semibold">Odbijeno!</strong> Vaša narudžbina (@item.NarucenProizvod_.Naziv) zahtevana @item.VremeNarucivanja je odbijena uz sledeću napomenu prodavca: "@item.Napomena".
+                 <input class="btn btn-danger" type="submit" asp-route-id="@item.ID"  asp-page-handler="Obrisi" value="Obrisi">
+                </div>
+              </div>
+              }
+              @if (item.Status=="Narucen")
+              {
+              <div class="col-sm-12">
+                <div class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                  <i class="start-icon fa fa-info-circle faa-flash animated"></i>
+                  <strong class="font__weight-semibold">Naručeno!</strong> Vaša narudžbina (@item.NarucenProizvod_.Naziv) zahtevana @item.VremeNarucivanja je u fazi obrade.
+                 <input class="btn btn-warning" type="submit" asp-route-id="@item.ID"  asp-page-handler="Obrisi" value="Obrisi">
+                </div>
+              </div>
+              }
+          </form>
+              
+      }
+        }      
+    </div>
+  </div>
+</section>
