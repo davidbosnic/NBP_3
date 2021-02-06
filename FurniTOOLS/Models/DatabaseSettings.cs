@@ -5,16 +5,14 @@ using System.Threading.Tasks;
 
 namespace FurniTOOLS.Models
 {
-    public class AdminDatabaseSettings:IAdminDatabaseSettings
+    public class DatabaseSettings:IDatabaseSettings
     {
-        public string AdminsCollectionName { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
 
-    public interface IAdminDatabaseSettings
+    public interface IDatabaseSettings
     {
-        public string AdminsCollectionName { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }

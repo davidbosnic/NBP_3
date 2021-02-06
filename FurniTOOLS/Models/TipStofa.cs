@@ -1,14 +1,20 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("TipoviStofova")]
+
     public class TipStofa
     {
-        [Key]
-        public int ID { get; set; }
-        [Required]
-        [StringLength(20,MinimumLength =3,ErrorMessage="Šifra štofa mora biti najmanje 3 karaktera, a najviše 20.")]
-        public string SifraStofa { get; set; }
-        public Stof MojiStof_ { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string ID { get; set; }
+    [BsonElement("sifrastofa")]
+    public string SifraStofa { get; set; }
+    [BsonElement("mojstof")]
+    public MongoDBRef MojiStof { get; set; }
+    [BsonIgnore]
+    public Stof MojiStof_ { get; set; }
     }

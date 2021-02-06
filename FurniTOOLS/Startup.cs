@@ -26,11 +26,11 @@ namespace WEBFurniTOOLS
         public void ConfigureServices(IServiceCollection services)
         {
             // requires using Microsoft.Extensions.Options
-            services.Configure<AdminDatabaseSettings>(
-                Configuration.GetSection(nameof(AdminDatabaseSettings)));
+            services.Configure<DatabaseSettings>(
+                Configuration.GetSection(nameof(DatabaseSettings)));
 
-            services.AddSingleton<IAdminDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<AdminDatabaseSettings>>().Value);
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddRazorPages();
             services.AddSession();

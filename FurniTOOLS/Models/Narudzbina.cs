@@ -1,38 +1,57 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("Narudzbine")]
+
     public class Narudzbina
     {
-        [Key]
-        public int ID { get; set; }
-        [Required]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ID { get; set; }
+        [BsonElement("profilkorisnika")]
+        public MongoDBRef ProfilKorisnika { get; set; }
+        [BsonElement("narucenstof")]
+        public MongoDBRef NarucenStof { get; set; }
+        [BsonElement("narucenproizvod")]
+        public MongoDBRef NarucenProizvod { get; set; }
+
+        [BsonIgnore]
         public Kupac ProfilKorisnika_ { get; set; }
+        [BsonIgnore]
         public TipStofa NarucenStof_ { get; set; }
-        [Required]
+        [BsonIgnore]
         public Proizvod NarucenProizvod_ { get; set; }
-        [Required]
-        [Range(1, 500,ErrorMessage="Količina je broj u opsegu od 1 do 500.")]
+
+
+
+
+    [BsonElement("kolicina")]
         public int Kolicina { get; set; }
-        [Required]
-        [DataType(DataType.Date,ErrorMessage="Datum je obavezno polje!")]
+        [BsonElement("vremenarucivanja")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime VremeNarucivanja { get; set; }
-        [Required]
-        [DataType(DataType.Date,ErrorMessage="Datum je obavezno polje!")]
+        [BsonElement("rokzapotvrdu")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime RokZaPotvrdu { get; set; }
-        [DataType(DataType.Date,ErrorMessage="Datum je obavezno polje!")]
+        [BsonElement("krajnjirokisporuke")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime KrajnjiRokIsporuke { get; set; }
-        [Required]
+        [BsonElement("status")]
         public string Status { get; set; }
+        [BsonElement("napomena")]
         public string Napomena { get; set; }
-        public bool Procitana { get; set; }
+        [BsonElement("procitana")]
+    public bool Procitana { get; set; }
 
         public double CenaBato()
         {
-            double dodatak=0;
-            if(NarucenStof_!=null)
-                dodatak+=NarucenStof_.MojiStof_.CenaPoMetruKvadratnom*NarucenProizvod_.PovrsinaMaterijala;
-            return Kolicina*(NarucenProizvod_.CenaPoKomadu+dodatak);
+        double dodatak = 0;
+        if (NarucenStof_ != null)
+            dodatak += NarucenStof_.MojiStof_.CenaPoMetruKvadratnom * NarucenProizvod_.PovrsinaMaterijala;
+        return Kolicina * (NarucenProizvod_.CenaPoKomadu + dodatak);
+        return 0;
         }
     }
