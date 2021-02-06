@@ -25,15 +25,15 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIzloguj()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-
+            return Page();
         }
     }
 }

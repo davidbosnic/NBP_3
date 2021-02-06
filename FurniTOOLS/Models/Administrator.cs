@@ -1,11 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 [Table("Administratori")]
     public class Administrator
     {
-        [Key]
-        public int ID { get; set; }
+
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ID { get; set; }
         [Required]
         public string Sifra { get; set; }
         [Required]

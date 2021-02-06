@@ -32,16 +32,16 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnGet()
         {
-            
+            return Page();
         }
         public async Task<ActionResult> OnPostDodaj()
         {
-            
+            return Page();
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            
-            
+
+            return Page();
         }
     }
 }

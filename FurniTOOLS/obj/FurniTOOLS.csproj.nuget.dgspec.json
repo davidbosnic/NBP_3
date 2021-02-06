@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\David\\source\\repos\\FurniTOOLS\\FurniTOOLS.csproj": {}
+    "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\David\\source\\repos\\FurniTOOLS\\FurniTOOLS.csproj": {
+    "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\David\\source\\repos\\FurniTOOLS\\FurniTOOLS.csproj",
+        "projectUniqueName": "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj",
         "projectName": "FurniTOOLS",
-        "projectPath": "C:\\Users\\David\\source\\repos\\FurniTOOLS\\FurniTOOLS.csproj",
+        "projectPath": "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj",
         "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\David\\source\\repos\\FurniTOOLS\\obj\\",
+        "outputPath": "E:\\gitHub\\NBP_3\\FurniTOOLS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -44,6 +44,20 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.11.6, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.11.6, )"
+            },
+            "MongoDB.Driver.Core": {
+              "target": "Package",
+              "version": "[2.11.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -62,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

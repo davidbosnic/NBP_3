@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using FurniTOOLS.Models;
+using MongoDB.Driver;
 
 namespace WEBFurniTOOLS
 {
@@ -20,15 +22,17 @@ namespace WEBFurniTOOLS
         public void OnGet()
         {
         }
-        private readonly AppContext _db;
-        public LogInModel(AppContext db)
+        private readonly IMongoCollection<Administrator> _db;
+        public LogInModel(IAdminDatabaseSettings settings)
         {
-            _db=db;
-            Message="";
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            _db = database.GetCollection<Administrator>(settings.AdminsCollectionName);
+            Message ="";
         }
         public async Task<IActionResult> OnPostLogin()
         {
-            
-		}
+            return Page();
+        }
     }
 }

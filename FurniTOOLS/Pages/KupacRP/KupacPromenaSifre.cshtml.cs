@@ -42,12 +42,12 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 
         public async Task<ActionResult> OnGet()
         {
-
+            return Page();
         }
 
         public async Task<ActionResult> OnPostIzmeni()
         {
-
+            return Page();
         }
         public string getUserString(string param)
         {
@@ -55,7 +55,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-
+            return Page();
         }
 
     }

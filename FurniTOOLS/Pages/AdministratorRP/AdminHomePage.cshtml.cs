@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace WEBFurniTOOLS.Pages.AdministratorRP
 {
@@ -31,17 +30,17 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnGet()
         {
-            
+            return Page();
 
         }
         public async Task<ActionResult> OnPostObrisiProdavca(int id)
         {
-            
+            return Page();
         }
         
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            
+            return Page();
         }
         public string getUserString(string param)
         {

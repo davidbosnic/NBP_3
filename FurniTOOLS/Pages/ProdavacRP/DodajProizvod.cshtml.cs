@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Azure.Storage;
-using Microsoft.Azure.Storage.Blob;
-using Microsoft.EntityFrameworkCore;
+//using Microsoft.Azure.Storage;
+//using Microsoft.Azure.Storage.Blob;
 
 namespace WEBFurniTOOLS.Pages.ProdavacRP
 {
@@ -46,15 +45,15 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostDodaj()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-
+            return Page();
         }
     }
 }

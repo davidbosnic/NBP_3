@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Azure.Storage;
-using Microsoft.Azure.Storage.Blob;
-using Microsoft.EntityFrameworkCore;
+//using Microsoft.Azure.Storage;
+//using Microsoft.Azure.Storage.Blob;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WEBFurniTOOLS.Pages.ProdavacRP
@@ -49,15 +48,15 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPost(int id)
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIzmeni()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-
+            return Page();
         }
     }
 }

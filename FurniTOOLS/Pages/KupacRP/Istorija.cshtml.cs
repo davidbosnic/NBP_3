@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace WEBFurniTOOLS.Pages.KupacRP
 {
@@ -35,19 +34,19 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet(int? pageIndex)
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-
+            return Page();
         }
          public async Task<ActionResult> OnPostIzlogujSe()
         {
-
+            return Page();
         }
     }
 }

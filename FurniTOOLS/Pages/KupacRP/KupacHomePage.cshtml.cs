@@ -35,11 +35,11 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-
+            return Page();
         }
     }
 }

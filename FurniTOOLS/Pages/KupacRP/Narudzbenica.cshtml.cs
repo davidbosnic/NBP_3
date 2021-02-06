@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace WEBFurniTOOLS.Pages.KupacRP
 {
@@ -42,15 +41,15 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnPostAsync(int id)
         {
-
+            return Page();
         }
         public async Task<IActionResult> OnPostStaviUKorpu()
         {
-
+            return Page();
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-
+            return Page();
         }
     }
 }

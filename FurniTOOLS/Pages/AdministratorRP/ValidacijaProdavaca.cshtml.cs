@@ -31,17 +31,18 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
 
         public async Task<ActionResult> OnPost(int id)
         {
-            
+            return Page();
+
         }
         public async Task<ActionResult> OnPostIzmeniProdavca()
         {
-            
-            
+            return Page();
+
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            
-            
+
+            return Page();
         }
     }
 }
