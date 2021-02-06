@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("Kupci")]
+
     public class Kupac
     {
-        [Key]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("id")]
         public int ID { get; set; }
         [Required]
         [StringLength(20, MinimumLength = 3,ErrorMessage="Ime mora imati minimum 3 karaktera, a najviše 20.")]

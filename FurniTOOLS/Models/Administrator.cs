@@ -3,22 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-[Table("Administratori")]
+
     public class Administrator
     {
-
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string ID { get; set; }
-        [Required]
+        [BsonElement("sifra")]
         public string Sifra { get; set; }
-        [Required]
-        [StringLength(50, MinimumLength = 8)]
+        [BsonElement("mail")]
         public string Mail { get; set; }
-        [Required]
-        [StringLength(20, MinimumLength = 3,ErrorMessage="Ime mora imati minimum 3 karaktera, a najviše 20.")]
+        [BsonElement("ime")]
         public string Ime { get; set; }
-        [Required]
-        [StringLength(20, MinimumLength = 3,ErrorMessage="Prezime mora imati minimum 3 karaktera, a najviše 20.")]
+        [BsonElement("prezime")]
         public string Prezime { get; set; }
     }
