@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FurniTOOLS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MongoDB.Driver;
 
 namespace WEBFurniTOOLS.Pages.AdministratorRP
 {
@@ -15,15 +17,16 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         [BindProperty]
         public Kupac noviKupac{get;set;}
         public int? idAdmin{get;set;}
-        public AppContext _db{get;set;}
+        private readonly IMongoDatabase _db;
 
         [BindProperty]
         public string ErrorMessage{get;set;}
 
-        public IzmeniKorisnikeModel(AppContext db)
+        public IzmeniKorisnikeModel(IDatabaseSettings settings)
         {
-            _db=db;
-            ErrorMessage="";
+            var client = new MongoClient(settings.ConnectionString);
+            _db = client.GetDatabase(settings.DatabaseName);
+            ErrorMessage ="";
         }
 
         public string getUserString(string param)
@@ -32,15 +35,79 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPost(int id)
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            if (log)
+            {
+                idAdmin = idLog;
+                var coll = _db.GetCollection<Administrator>("Admins");
+                var res = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                ImeAdmina = res.Mail;
+                var coll2 = _db.GetCollection<Kupac>("Kupci");
+                var res1 = await coll2.FindAsync(id.ToString());
+                noviKupac = res1.SingleOrDefault();
+                if (noviKupac != null)
+                {
+                    Console.WriteLine(id);
+                    return Page();
+                }
+                else
+                {
+                    return RedirectToPage("./AdminHomePage");
+                }
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }  
         public async Task<ActionResult> OnPostIzmeni()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            if (log)
+            {
+                idAdmin = idLog;
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+                else
+                {
+                    var coll = _db.GetCollection<Kupac>("Kupci");
+                    var filter1 = (Builders<Kupac>.Filter.Eq(x => x.Email, noviKupac.Email) & Builders<Kupac>.Filter.Ne(x => x.ID, noviKupac.ID));
+                    Kupac pom = coll.Find(filter1).SingleOrDefault();
+                    if (pom != null)
+                    {
+                        ErrorMessage = "Postoji nalog sa datom email adresom !";
+                        return Page();
+                    }
+                    else
+                    {
+                        ErrorMessage = "";
+                        coll.ReplaceOne(x => x.ID == noviKupac.ID, noviKupac);
+    
+                        return RedirectToPage("AdminHomePage");
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         } 
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            if (log)
+            {
+                HttpContext.Session.Remove("idAdmin");
+                HttpContext.Session.Remove("imeAdmina");
+                HttpContext.Session.Remove("prezimeAdmina");
+                HttpContext.Session.Remove("emailAdmina");
+            }
+            return RedirectToPage("../Index");
 
         }     
     }

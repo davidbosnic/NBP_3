@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FurniTOOLS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MongoDB.Driver;
 
 namespace WEBFurniTOOLS.Pages.AdministratorRP
 {
@@ -13,8 +15,8 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         public bool Ucitano { get; set; }
         public string ImeAdmina { get; set; }
         public int? idAdmin{get;set;}
-        public AppContext _db{get;set;}
-        
+        private readonly IMongoDatabase _db;
+
         [BindProperty(SupportsGet=true)]
         public Administrator Admin{get;set;}
 
@@ -30,21 +32,70 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         [BindProperty]
         public string staraSifra{get;set;}
 
-        public AdminPromenaSifreModel(AppContext db)
+        public AdminPromenaSifreModel(IDatabaseSettings settings)
         {
-            _db=db;
-            ErrorMessage="";
+            var client = new MongoClient(settings.ConnectionString);
+            _db = client.GetDatabase(settings.DatabaseName);
+            ErrorMessage ="";
             Ucitano=false;
         }
 
         public async Task<ActionResult> OnGet()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            if (log)
+            {
+                idAdmin = idLog;
+                var coll = _db.GetCollection<Administrator>("Admins");
+                //Ja=_db.Kupci.Where(x=>x.ID==idKupac).SingleOrDefault();
+                Admin = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
 
         public async Task<ActionResult> OnPostIzmeni()
         {
-            return Page();
+            Ucitano = true;
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            if (log)
+            {
+                idAdmin = idLog;
+
+                var coll = _db.GetCollection<Administrator>("Admins");
+
+                Administrator pom = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                if (pom.Sifra != staraSifra)
+                {
+                    ErrorMessage = "Pogrešili ste trenutnu šifru";
+                    return Page();
+                }
+                if (novaSifra != novaSifraPonovo)
+                {
+                    ErrorMessage = "Niste uneli dva puta istu šifru";
+                    return Page();
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    Admin = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                    Admin.Sifra = novaSifra;
+                    //ovo je valjda update nisam siguran
+                    coll.ReplaceOne(x => x.ID == Admin.ID, Admin);
+                    return RedirectToPage("./AdminHomePage");
+                }
+
+
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
         public string getUserString(string param)
         {
@@ -53,7 +104,16 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
 
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            if (log)
+            {
+                HttpContext.Session.Remove("idAdmin");
+                HttpContext.Session.Remove("imeAdmina");
+                HttpContext.Session.Remove("prezimeAdmina");
+                HttpContext.Session.Remove("emailAdmina");
+            }
+            return RedirectToPage("../Index");
 
         }
     }
