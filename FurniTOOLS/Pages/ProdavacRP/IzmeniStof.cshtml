@@ -119,18 +119,18 @@
             <span class="input-group-text" id="inputGroupFileAddon01">Slika : </span>
         </div>
         <div class="custom-file">
-            <input type="file" asp-for="SlikaStofa" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+            <input type="text" asp-for="stofZaIzmenu.URLSlike" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
             <label class="custom-file-label" for="inputGroupFile01">Odaberite fajl</label>
         </div>
     </div>
-    <script>
+    @*<script>
             $('#inputGroupFile01').on('change',function(){
                 //get the file name
                 var fileName = $(this).val().replace('C:\\fakepath\\', " ");
                 //replace the "Choose a file" label
                 $(this).next('.custom-file-label').html(fileName);
             })
-        </script>
+        </script>*@
 
         <button style="float: right;margin-bottom: 10px"  class="btn btn-warning" type="submit" asp-page-handler="Izmeni">Izmeni štof</button>
         <label >Svi tipovi štofa : </label>

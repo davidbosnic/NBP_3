@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FurniTOOLS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MongoDB.Driver;
 //using Microsoft.Azure.Storage;
 //using Microsoft.Azure.Storage.Blob;
 
@@ -15,7 +17,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         [BindProperty]
         public Prodavac Ja { get; set; } 
         public bool Ucitano { get; set; }
-        public AppContext _db{get;set;}
+        private readonly IMongoDatabase _db;
         [BindProperty]
         public string ErrorMessage1{get;set;}
         [BindProperty]
@@ -28,13 +30,14 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         [BindProperty(SupportsGet=true)]
         public string nebitno { get; set; }
 
-        [BindProperty]
-        public IFormFile Slika {get;set;}
+        //[BindProperty]
+        //public IFormFile Slika {get;set;}
 
-        public DodajProizvodModel(AppContext db)
+        public DodajProizvodModel(IDatabaseSettings settings)
         {
-            _db=db;
-            ErrorMessage1="";
+            var client = new MongoClient(settings.ConnectionString);
+            _db = client.GetDatabase(settings.DatabaseName);
+            ErrorMessage1 ="";
             ErrorMessage2="";
             Ucitano=false;
         }
@@ -45,15 +48,57 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+                idProdavac = idLog;
+                var coll = _db.GetCollection<Prodavac>("Prodavci");
+                Ja = coll.Find(x=>x.ID==idProdavac.ToString()).SingleOrDefault();
+                
+                //noviProizvod.MojProdavac= new MongoDBRef("mojprodavac", idProdavac.ToString());
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
         public async Task<ActionResult> OnPostDodaj()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+
+                var coll = _db.GetCollection<Prodavac>("Prodavci");
+                Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
+
+                noviProizvod.MojProdavac = new MongoDBRef("mojprodavac", idLog.ToString());
+                pom.MojiProizvodi.Add(noviProizvod);
+
+
+                ErrorMessage1 = "";
+                ErrorMessage2 = "";
+
+                coll.ReplaceOne(x => x.ID == idLog.ToString(), pom);
+                return RedirectToPage("./ProdavacHomePage");
+           
+            }
+            return RedirectToPage("../Index");
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+                HttpContext.Session.Remove("idProdavac");
+                HttpContext.Session.Remove("imeProdavca");
+                HttpContext.Session.Remove("prezimeProdavca");
+                HttpContext.Session.Remove("emailProdavca");
+            }
+            return RedirectToPage("../Index");
         }
     }
 }

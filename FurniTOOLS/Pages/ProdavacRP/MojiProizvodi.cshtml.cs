@@ -2,15 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FurniTOOLS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MongoDB.Driver;
 
 namespace WEBFurniTOOLS.Pages.ProdavacRP
 {
     public class MojiProizvodiModel : PageModel
     {
-        public AppContext _db{get;set;}
+        private readonly IMongoDatabase _db;
         public int? idProdavac{get;set;}
         [BindProperty]
         public Prodavac Ja { get; set; } 
@@ -22,10 +24,11 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public int pageSize{get;set;}
 
-        public MojiProizvodiModel(AppContext db)
+        public MojiProizvodiModel(IDatabaseSettings settings)
         {
-            _db=db;
-            pageInput=1;
+            var client = new MongoClient(settings.ConnectionString);
+            _db = client.GetDatabase(settings.DatabaseName);
+            pageInput =1;
         }
 
         public string getUserString(string param)
@@ -34,24 +37,92 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet(int? pageIndex)
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+                idProdavac = idLog;
+                var coll = _db.GetCollection<Prodavac>("Prodavci");
+
+                Ja = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
+                IQueryable<Proizvod> proizvodIQ = Ja.MojiProizvodi.AsQueryable();
+                pageSize = Convert.ToInt32(HttpContext.Session.GetString("pageSize"));
+                MojiProizvodi = await PaginatedList<Proizvod>.CreateAsync(
+                     proizvodIQ, pageIndex ?? 1, pageSize);
+                //MojiProizvodi=_db.Proizvodi.Where(x=>x.MojProdavac_.ID==idProdavac).ToList();
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
 
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+                Console.WriteLine(pageInput + "++++++++++");
+                return RedirectToPage("./MojiProizvodi", new { pageIndex = pageInput });
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+                HttpContext.Session.SetString("pageSize", brEl.ToString());
+                return RedirectToPage("./MojiProizvodi", new { pageIndex = 1 });
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
         public async Task<ActionResult> OnPostObrisiProizvod(int id)
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+                idProdavac = idLog;
+                var coll = _db.GetCollection<Prodavac>("Prodavci");
+                Prodavac pom = coll.Find(x=>x.ID==idProdavac.ToString()).SingleOrDefault();
+                if (pom != null)
+                {
+                    pom.MojiProizvodi.RemoveAll(x => x.Sifra == id.ToString());
+                    coll.ReplaceOne(x => x.ID == idProdavac.ToString(), pom);
+                    return RedirectToPage();
+                }
+                else
+                {
+                    return RedirectToPage("./ProdavacHomePage");
+                }
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            if (log)
+            {
+                HttpContext.Session.Remove("idProdavac");
+                HttpContext.Session.Remove("imeProdavca");
+                HttpContext.Session.Remove("prezimeProdavca");
+                HttpContext.Session.Remove("emailProdavca");
+            }
+            return RedirectToPage("../Index");
         }
     }
 }

@@ -49,7 +49,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
                 idAdmin = idLog;
                 var coll = _db.GetCollection<Administrator>("Admins");
                 //Ja=_db.Kupci.Where(x=>x.ID==idKupac).SingleOrDefault();
-                Admin = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                Admin = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
                 return Page();
             }
             else
@@ -69,7 +69,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
 
                 var coll = _db.GetCollection<Administrator>("Admins");
 
-                Administrator pom = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                Administrator pom = coll.Find(x => x.ID == idAdmin.ToString()).SingleOrDefault();
                 if (pom.Sifra != staraSifra)
                 {
                     ErrorMessage = "Pogrešili ste trenutnu šifru";
@@ -83,7 +83,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
                 else
                 {
                     ErrorMessage = "";
-                    Admin = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                    Admin = coll.Find(x => x.ID == idAdmin.ToString()).SingleOrDefault();
                     Admin.Sifra = novaSifra;
                     //ovo je valjda update nisam siguran
                     coll.ReplaceOne(x => x.ID == Admin.ID, Admin);

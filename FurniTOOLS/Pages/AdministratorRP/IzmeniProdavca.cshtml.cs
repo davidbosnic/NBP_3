@@ -42,11 +42,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             {
                 idAdmin = idLog;
                 var coll = _db.GetCollection<Administrator>("Admins");
-                var res = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                var res = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
                 ImeAdmina = res.Mail;
 
                 var coll2 = _db.GetCollection<Prodavac>("Prodavci");
-                var res1 = await coll2.FindAsync(id.ToString());
+                var res1 = await coll2.FindAsync(x=>x.ID==id.ToString());
                 prodavacZaIzmenu = res1.SingleOrDefault();
                 if (prodavacZaIzmenu != null)
                 {

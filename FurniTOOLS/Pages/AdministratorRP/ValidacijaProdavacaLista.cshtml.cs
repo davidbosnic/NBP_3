@@ -42,7 +42,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             {
                 idAdmin = idLog;
                 var coll = _db.GetCollection<Administrator>("Admins");
-                var res = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                var res = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
                 ImeAdmina = res.Mail;
 
                 var coll2 = _db.GetCollection<Prodavac>("Prodavci");
@@ -97,11 +97,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             {
                 idAdmin = idLog;
                 var coll2 = _db.GetCollection<Prodavac>("Prodavci");
-                Prodavac zaBrisanje = coll2.Find(id.ToString()).SingleOrDefault();
-                if (zaBrisanje != null)
+                Prodavac pom = coll2.Find(x=>x.ID==id.ToString()).SingleOrDefault();
+                if (pom != null)
                 {
-                    zaBrisanje.Verifikovan = true;
-                    coll2.ReplaceOne(x => x.ID == id.ToString(), zaBrisanje);
+                    pom.Verifikovan = true;
+                    coll2.ReplaceOne(x => x.ID == id.ToString(), pom);
                 }
                 return RedirectToPage();
             }

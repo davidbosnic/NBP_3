@@ -43,7 +43,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             {
                 idAdmin = idLog;
                 var coll = _db.GetCollection<Administrator>("Admins");
-                var res = coll.Find(idAdmin.ToString()).SingleOrDefault();
+                var res = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
                 ImeAdmina = res.Mail;
 
                 var coll2 = _db.GetCollection<Prodavac>("Prodavci");

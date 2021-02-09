@@ -40,7 +40,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             {
                 idAdmin = idLog;
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
-                prodavacZaIzmenu = coll.Find(id.ToString()).SingleOrDefault();
+                prodavacZaIzmenu = coll.Find(x=>x.ID==id.ToString()).SingleOrDefault();
                 if (prodavacZaIzmenu != null)
                 {
                     return Page();

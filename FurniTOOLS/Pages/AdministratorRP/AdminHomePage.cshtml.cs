@@ -40,7 +40,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             {
                 idAdmin = idLog;
                 var coll = _db.GetCollection<Administrator>("Admins");
-                Administrator pom = coll.Find(idAdmin.ToString()).FirstOrDefault();
+                Administrator pom = coll.Find(x=>x.ID==idAdmin.ToString()).FirstOrDefault();
                 ImeAdmina = pom.Mail;
                 var coll1 = _db.GetCollection<Prodavac>("Prodavci");
                 var filter1 = Builders<Prodavac>.Filter.Where(x=>x.Verifikovan==false);
@@ -72,7 +72,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             {
                 idAdmin = idLog;
                 var coll1 = _db.GetCollection<Prodavac>("Prodavci");
-                var res=await coll1.FindAsync(id.ToString());
+                var res=await coll1.FindAsync(x=>x.ID==id.ToString());
                 Prodavac zaBrisanje = res.SingleOrDefault();
                 if (zaBrisanje != null)
                 {

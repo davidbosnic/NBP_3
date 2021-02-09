@@ -17,7 +17,7 @@
 </style>
 <div class="container">
 <form method="POST" enctype = "multipart/form-data">
-    <input type="hidden" asp-for="proizvodZaIzmenu.URLSlike">
+    <input type="hidden" asp-for="proizvodZaIzmenu.Sifra">
     <input type="hidden" asp-for="idProizvod">
     <input type="hidden" asp-for="proizvodZaIzmenu.ID">
     <h1>Izmeni proizvod</h1>
@@ -62,12 +62,12 @@
         <input type="text" class="form-control" asp-for="proizvodZaIzmenu.Naziv"  aria-describedby="basic1">
     </div>
     
-    <div class="input-group mb-3">
+    @*<div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic2">Šifra proizvoda : </span>
         </div>
         <input type="text" class="form-control" asp-for="proizvodZaIzmenu.Sifra"  aria-describedby="basic2">
-    </div>
+    </div>*@
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -100,30 +100,30 @@
         <input  class="form-control" type="number" asp-for="proizvodZaIzmenu.CenaPoKomadu" aria-describedby="basic6">
     </div>
 
-    <div class="input-group mb-3">
+    @*<div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic7">Promeni sliku ? </span>
         </div>
         <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="PromeniSliku" aria-describedby="basic7">
-    </div>
+    </div>*@
 
     <div class="input-group mb-3">
         <div style="height: 38px;" class="input-group-prepend">
             <span class="input-group-text" id="inputGroupFileAddon01">Slika proizvoda : </span>
         </div>
         <div class="custom-file">
-            <input type="file" asp-for="Slika" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputGroupFile01">Odaberite fajl</label>
+            <input type="text" asp-for="proizvodZaIzmenu.URLSlike" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputGroupFile01">URL slike</label>
         </div>
     </div>
-    <script>
+    @*<script>
             $('#inputGroupFile01').on('change',function(){
                 //get the file name
                 var fileName = $(this).val().replace('C:\\fakepath\\', " ");
                 //replace the "Choose a file" label
                 $(this).next('.custom-file-label').html(fileName);
             })
-        </script>
+        </script>*@
 
         <input style="margin-top: 20px;float: right;" class="btn btn-warning" type="submit" asp-page-handler="Izmeni" value="Izmeni proizvod">
     
