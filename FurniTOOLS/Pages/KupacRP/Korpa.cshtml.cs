@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FurniTOOLS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MongoDB.Driver;
 
 namespace WEBFurniTOOLS.Pages.KupacRP
 {
@@ -14,10 +16,11 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         public Kupac Ja { get; set; }
         public List<Narudzbina> narudzbine { get; set; }
         public int? idKupac { get; set; }
-        public AppContext _db { get; set; }
-        public KorpaModel(AppContext db)
+        private readonly IMongoDatabase _db;
+        public KorpaModel(IDatabaseSettings settings)
         {
-            _db=db;
+            var client = new MongoClient(settings.ConnectionString);
+            _db = client.GetDatabase(settings.DatabaseName);
         }
 
         public double ukupno()
@@ -36,19 +39,81 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            if (log)
+            {
+                idKupac = idLog;
+                var coll = _db.GetCollection<Kupac>("Kupci");
+                Ja = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
+                var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
+                List<Narudzbina> pom = new List<Narudzbina>();
+                foreach (MongoDBRef n in Ja.MojeNarudzbine_)
+                {
+                    var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
+                    Narudzbina npom = coll2.Find(filter).SingleOrDefault();
+                    if (npom.Status == "Korpa")
+                    {
+                        pom.Add(npom);
+                    }
+                }
+                Ja.MojeNarudzbine = pom;
+                narudzbine = pom;
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
         public async Task<IActionResult> OnPostIzbaci(int id)
         {
-            return Page();
+            var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
+            //verovatno ce onda treba i dbref koji kupac cuva da se brise, trebe se proveri
+            coll2.DeleteOne(x => x.ID == id.ToString());
+            return RedirectToPage();
         }
         public async Task<IActionResult> OnPostKupi()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            if (log)
+            {
+                idKupac = idLog;
+                var coll = _db.GetCollection<Kupac>("Kupci");
+                Kupac pom1 = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
+                var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
+                
+                foreach (MongoDBRef n in pom1.MojeNarudzbine_)
+                {
+                    var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
+                    Narudzbina npom = coll2.Find(filter).SingleOrDefault();
+                    if (npom.Status == "Korpa")
+                    {
+                        npom.Status = "Narucen";
+                        coll2.ReplaceOne(x => x.ID == npom.ID, npom);
+                    }
+                }
+
+                return RedirectToPage();
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            return Page();
+            int idLog;
+            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            if (log)
+            {
+                HttpContext.Session.Remove("idKupac");
+                HttpContext.Session.Remove("imeKupca");
+                HttpContext.Session.Remove("prezimeKupca");
+                HttpContext.Session.Remove("emailKupca");
+            }
+            return RedirectToPage("../Index");
         }
     }
 }
