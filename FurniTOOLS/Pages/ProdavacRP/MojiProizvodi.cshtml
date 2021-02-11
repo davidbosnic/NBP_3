@@ -80,8 +80,8 @@ class="btn btn-primary ">Idi na stranu</a> *@
                     <div style="font-size: large;margin-top: 20px;">Cena: @proizvod.CenaPoKomadu€</div>
                     <div style="font-size: large;margin-top: 20px;">Šifra proizvoda: @proizvod.Sifra</div>
                     <div style="font-size: large;margin-top: 20px;">Površina pod materijalom: @proizvod.PovrsinaMaterijala m<sup>2</sup></div>
-                    <button style="margin-top: 20px;" class="btn btn-warning" type="submit" asp-page="./IzmeniProizvod" asp-route-id="@proizvod.ID">Izmeni</button>
-                    <button style="margin-top: 20px;" class="btn btn-warning" asp-page-handler="ObrisiProizvod" asp-route-id="@proizvod.ID" type="submit">Obrisi</button>
+                    <button style="margin-top: 20px;" class="btn btn-warning" type="submit" asp-page="./IzmeniProizvod" asp-route-id="@proizvod.Sifra">Izmeni</button>
+                    <button style="margin-top: 20px;" class="btn btn-warning" asp-page-handler="ObrisiProizvod" asp-route-id="@proizvod.Sifra" type="submit">Obrisi</button>
                 </div>
 
             </div>

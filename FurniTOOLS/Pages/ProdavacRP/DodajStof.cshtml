@@ -37,63 +37,61 @@
     </div>
     </form>
 
-<form method="POST" enctype = "multipart/form-data">
-    @if(@Model.brojTipova!=null)
-    {
-
-        @* <label style="float: right;margin-top: 10px;">Naziv štofa :</label>
-        <input  style="float: right;margin-top: 10px;"type="text" asp-for="stofZaDodavanje.Naziv">
-        <label style="float: right;margin-top: 10px;">Cena po metru kvadratnom :</label>
-        <input style="float: right;margin-top: 10px;" type="number" asp-for="stofZaDodavanje.CenaPoMetruKvadratnom">
-        <label style="float: right;margin-top: 10px;">Slika :</label>
-        <input style="float: right;margin-top: 10px;" class="btn btn-warning" type="file" asp-for="SlikaStofa"> *@
-
-        <div style="margin-top: 10px" class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic1">Naziv štofa : </span>
-            </div>
-            <input type="text" class="form-control" asp-for="stofZaDodavanje.Naziv"  aria-describedby="basic1">
-        </div>
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic2">Cena po metru kvadratnom :</span>
-        </div>
-        <input class="form-control" type="number" asp-for="stofZaDodavanje.CenaPoMetruKvadratnom"  aria-describedby="basic2">
-    </div>
-
-    <div class="input-group mb-3">
-        <div style="height: 38px;" class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Slika : </span>
-        </div>
-        <div class="custom-file">
-            <input type="text" asp-for="stofZaDodavanje.URLSlike" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputGroupFile01">Odaberite fajl</label>
-        </div>
-    </div>
-    @*<script>
-            $('#inputGroupFile01').on('change',function(){
-                //get the file name
-                var fileName = $(this).val().replace('C:\\fakepath\\', " ");
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            })
-        </script>*@
-
-
-        <label>Unesite sve tipove novog štofa :</label>
-        @for(var i=0;i<=@Model.brojTipova-1;i++)
+    <form method="POST" enctype="multipart/form-data">
+        @if (@Model.brojTipova != null)
         {
-            @* <input style="float: right;margin-top: 10px;" type="text" asp-for="tipoviZaDodavanje[i].SifraStofa"> *@
+
+            @* <label style="float: right;margin-top: 10px;">Naziv štofa :</label>
+            <input  style="float: right;margin-top: 10px;"type="text" asp-for="stofZaDodavanje.Naziv">
+            <label style="float: right;margin-top: 10px;">Cena po metru kvadratnom :</label>
+            <input style="float: right;margin-top: 10px;" type="number" asp-for="stofZaDodavanje.CenaPoMetruKvadratnom">
+            <label style="float: right;margin-top: 10px;">Slika :</label>
+            <input style="float: right;margin-top: 10px;" class="btn btn-warning" type="file" asp-for="SlikaStofa"> *@
+
+            <div style="margin-top: 10px" class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic1">Naziv štofa : </span>
+                </div>
+                <input type="text" class="form-control" asp-for="stofZaDodavanje.Naziv" aria-describedby="basic1">
+            </div>
 
             <div class="input-group mb-3">
-                <input class="form-control" type="text" asp-for="tipoviZaDodavanje[i].SifraStofa" >
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic2">Cena po metru kvadratnom :</span>
+                </div>
+                <input class="form-control" type="number" asp-for="stofZaDodavanje.CenaPoMetruKvadratnom" aria-describedby="basic2">
             </div>
+
+            <div style="margin-top: 10px" class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic1">Slika proizvoda : </span>
+                </div>
+                <input type="text" class="form-control" asp-for="stofZaDodavanje.URLSlike" aria-describedby="basic1">
+            </div>
+
+            @*<script>
+                $('#inputGroupFile01').on('change',function(){
+                    //get the file name
+                    var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+                    //replace the "Choose a file" label
+                    $(this).next('.custom-file-label').html(fileName);
+                })
+            </script>*@
+
+
+            <label>Unesite sve tipove novog štofa :</label>
+            @for (var i = 0; i <= @Model.brojTipova - 1; i++)
+            {
+                @* <input style="float: right;margin-top: 10px;" type="text" asp-for="tipoviZaDodavanje[i].SifraStofa"> *@
+
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" asp-for="tipoviZaDodavanje[i].SifraStofa">
+                </div>
+            }
+            <button style="float: right;margin-top: 10px;" class="btn btn-warning" type="submit" asp-page-handler="Dodaj">Dodaj štof</button>
+
         }
-        <button style="float: right;margin-top: 10px;" class="btn btn-warning" type="submit" asp-page-handler="Dodaj">Dodaj štof</button>
-     
-    }
-</form>
+    </form>
 </div>
     @if(@Model.Ucitano==false)
     {

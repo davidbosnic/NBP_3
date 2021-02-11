@@ -15,7 +15,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         private readonly IMongoDatabase _db;
 
         public PaginatedList<Stof> MojiStofovi { get; set; }
-        public int? idProdavac { get; set; }
+        public string idProdavac { get; set; }
         public MojiStofoviModel(IDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
@@ -37,18 +37,26 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet(int? pageIndex)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
 
-                Ja = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
-                IQueryable<Stof> stofIQ = Ja.MojiStofovi.AsQueryable();
-                pageSize = Convert.ToInt32(HttpContext.Session.GetString("pageSize"));
-                MojiStofovi = await PaginatedList<Stof>.CreateAsync(
-                     stofIQ, pageIndex ?? 1, pageSize);
+                Ja = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
+                if (Ja.MojiStofovi != null)
+                {
+                    IQueryable<Stof> stofIQ = Ja.MojiStofovi.AsQueryable();
+                    pageSize = Convert.ToInt32(HttpContext.Session.GetString("pageSize"));
+                    MojiStofovi = await PaginatedList<Stof>.CreateAsync(
+                         stofIQ, pageIndex ?? 1, pageSize);
+                }
+                else
+                {
+                    MojiStofovi = await PaginatedList<Stof>.CreateAsync(
+                         new List<Stof>().AsQueryable(), pageIndex ?? 1, pageSize);
+                }
                 //MojiProizvodi=_db.Proizvodi.Where(x=>x.MojProdavac_.ID==idProdavac).ToList();
                 return Page();
             }
@@ -59,8 +67,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 Console.WriteLine(pageInput + "++++++++++");
@@ -73,8 +81,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.SetString("pageSize", brEl.ToString());
@@ -85,17 +93,17 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                 return RedirectToPage("../Index");
             }
         }
-        public async Task<ActionResult> OnPostObrisiAsync(int id)
+        public async Task<ActionResult> OnPostObrisiAsync(string naziv)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 //ovde isto ce po imenu verovatno, ako ne uvedemo neki brojac ili slicno za id
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Prodavac pom = coll.Find(x=>x.ID==idProdavac.ToString()).SingleOrDefault();
-                pom.MojiStofovi.RemoveAll(x => x.Naziv == id.ToString());
+                pom.MojiStofovi.RemoveAll(x => x.Naziv == naziv);
                 coll.ReplaceOne(x => x.ID == idProdavac.ToString(), pom);
                 return RedirectToPage();
             }
@@ -106,8 +114,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

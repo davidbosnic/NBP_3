@@ -22,7 +22,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 
         public string ErrorMessage{get;set;}
 
-        public int? idKupac{get;set;}
+        public string idKupac{get;set;}
 
         [BindProperty]
         public string novaSifra{get;set;}
@@ -45,11 +45,11 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
-                idKupac = idLog;
+                idKupac = HttpContext.Session.GetString("idKupac");
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 kupacZaIzmenu = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
                 //Ja=_db.Kupci.Where(x=>x.ID==idKupac).SingleOrDefault();
@@ -65,11 +65,11 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         public async Task<ActionResult> OnPostIzmeni()
         {
             Ucitano = true;
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
-                idKupac = idLog;
+                idKupac = HttpContext.Session.GetString("idKupac");
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 Kupac pom = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
 
@@ -106,8 +106,8 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
                 HttpContext.Session.Remove("idKupac");

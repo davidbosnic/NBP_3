@@ -23,7 +23,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public string ErrorMessage1{get;set;}
         [BindProperty]
         public string ErrorMessage2{get;set;}
-        public int? idProdavac{get;set;}
+        public string idProdavac{get;set;}
 
         [BindProperty(SupportsGet=true)]
         public Proizvod proizvodZaIzmenu{get;set;}
@@ -49,18 +49,17 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         {
             return HttpContext.Session.GetString(param);
         }
-        public async Task<ActionResult> OnPost(int id)
+        public async Task<ActionResult> OnPost(string id)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
-                idProizvod = id;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 Console.WriteLine(id + " " + idProdavac);
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 //moracemo ovde verovanto da prosledimo sifru proizvoda posto on nema svoj id jer se ne cuva u zasebnu kolekciju
-                Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
+                Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
                 foreach (Proizvod p in pom.MojiProizvodi)
                 {
                     if (p.Sifra==id.ToString())
@@ -79,17 +78,17 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzmeni()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 
                 ErrorMessage1 = "";
                 ErrorMessage2 = "";
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
-                Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
-                proizvodZaIzmenu.MojProdavac = new MongoDBRef("mojprodavac", idLog.ToString());
+                Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
+                proizvodZaIzmenu.MojProdavac = new MongoDBRef("mojprodavac", idProdavac.ToString());
                 for (int i=0;i<=pom.MojiProizvodi.Count;i++)
                 {
                     if (pom.MojiProizvodi[i].Sifra==proizvodZaIzmenu.Sifra)
@@ -97,7 +96,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                         pom.MojiProizvodi[i] = proizvodZaIzmenu;
                     }
                 }
-                coll.ReplaceOne(x => x.ID == idLog.ToString(), pom);
+                coll.ReplaceOne(x => x.ID == idProdavac.ToString(), pom);
 
                 return RedirectToPage("./ProdavacHomePage");
                  
@@ -106,8 +105,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

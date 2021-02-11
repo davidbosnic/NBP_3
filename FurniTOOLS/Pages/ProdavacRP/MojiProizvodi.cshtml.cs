@@ -13,7 +13,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
     public class MojiProizvodiModel : PageModel
     {
         private readonly IMongoDatabase _db;
-        public int? idProdavac{get;set;}
+        public string idProdavac{get;set;}
         [BindProperty]
         public Prodavac Ja { get; set; } 
         public PaginatedList<Proizvod> MojiProizvodi {get;set;}
@@ -37,18 +37,26 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet(int? pageIndex)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
 
-                Ja = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
-                IQueryable<Proizvod> proizvodIQ = Ja.MojiProizvodi.AsQueryable();
-                pageSize = Convert.ToInt32(HttpContext.Session.GetString("pageSize"));
-                MojiProizvodi = await PaginatedList<Proizvod>.CreateAsync(
-                     proizvodIQ, pageIndex ?? 1, pageSize);
+                Ja = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
+                if (Ja.MojiProizvodi != null)
+                {
+                    IQueryable<Proizvod> proizvodIQ = Ja.MojiProizvodi.AsQueryable();
+                    pageSize = Convert.ToInt32(HttpContext.Session.GetString("pageSize"));
+                    MojiProizvodi = await PaginatedList<Proizvod>.CreateAsync(
+                         proizvodIQ, pageIndex ?? 1, pageSize);
+                }
+                else
+                {
+                    MojiProizvodi = await PaginatedList<Proizvod>.CreateAsync(
+                         new List<Proizvod>().AsQueryable(), pageIndex ?? 1, pageSize);
+                }
                 //MojiProizvodi=_db.Proizvodi.Where(x=>x.MojProdavac_.ID==idProdavac).ToList();
                 return Page();
             }
@@ -60,8 +68,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 Console.WriteLine(pageInput + "++++++++++");
@@ -74,8 +82,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.SetString("pageSize", brEl.ToString());
@@ -86,13 +94,13 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                 return RedirectToPage("../Index");
             }
         }
-        public async Task<ActionResult> OnPostObrisiProizvod(int id)
+        public async Task<ActionResult> OnPostObrisiProizvod(string id)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Prodavac pom = coll.Find(x=>x.ID==idProdavac.ToString()).SingleOrDefault();
                 if (pom != null)
@@ -113,8 +121,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

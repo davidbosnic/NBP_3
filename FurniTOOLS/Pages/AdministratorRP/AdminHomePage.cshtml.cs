@@ -21,7 +21,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         [BindProperty]
         public int BrNeVer { get; set; }
         public string ImeAdmina { get; set; }
-        public int? idAdmin{get;set;}
+        public string idAdmin{get;set;}
         public List<Prodavac> NeverifikovaniProdavci{get;set;}
         public List<Prodavac> VerifikovaniProdavci{get;set;}
         public List<Kupac> SviKorisnici{get;set;}
@@ -34,11 +34,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 var coll = _db.GetCollection<Administrator>("Admins");
                 Administrator pom = coll.Find(x=>x.ID==idAdmin.ToString()).FirstOrDefault();
                 ImeAdmina = pom.Mail;
@@ -64,13 +64,13 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
             }
 
         }
-        public async Task<ActionResult> OnPostObrisiProdavca(int id)
+        public async Task<ActionResult> OnPostObrisiProdavca(string id)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 var coll1 = _db.GetCollection<Prodavac>("Prodavci");
                 var res=await coll1.FindAsync(x=>x.ID==id.ToString());
                 Prodavac zaBrisanje = res.SingleOrDefault();
@@ -88,8 +88,8 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
                 HttpContext.Session.Remove("idAdmin");

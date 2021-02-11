@@ -20,7 +20,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public string ErrorMessage{get;set;}
 
-        public int? idProdavac{get;set;}
+        public string idProdavac{get;set;}
 
         [BindProperty]
         public string novaSifra{get;set;}
@@ -48,11 +48,11 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 //Ja=_db.Prodavci.Where(x=>x.ID==idProdavac).SingleOrDefault();
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 prodavacZaIzmenu = coll.Find(x => x.ID == idProdavac.ToString()).SingleOrDefault();
@@ -68,11 +68,11 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public async Task<ActionResult> OnPostIzmeni()
         {
             Ucitano = true;
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Prodavac pom = coll.Find(x => x.ID == idProdavac.ToString()).SingleOrDefault();
                 if (pom.Sifra != staraSifra)
@@ -102,8 +102,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

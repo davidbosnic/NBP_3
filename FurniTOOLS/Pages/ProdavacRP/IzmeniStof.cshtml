@@ -47,43 +47,43 @@
  
 
 </form>
-<form method="POST" enctype = "multipart/form-data">
-    
+<form method="POST" enctype="multipart/form-data">
+
     <input style="float: right;" type="hidden" asp-for="Ja.ID">
     <input style="float: right;" type="hidden" asp-for="Ja.Ime">
     <input style="float: right;" type="hidden" asp-for="Ja.Prezime">
-    <input style="float: right;" type="hidden" asp-for="Ja.Email" >
+    <input style="float: right;" type="hidden" asp-for="Ja.Email">
     <input style="float: right;" type="hidden" asp-for="Ja.Sifra">
     <input style="float: right;" type="hidden" asp-for="Ja.BrojTelefona">
     <input style="float: right;" type="hidden" asp-for="Ja.Adresa">
     <input style="float: right;" type="hidden" asp-for="Ja.Grad">
     <input style="float: right;" type="hidden" asp-for="Ja.Firma">
     <input style="float: right;" type="hidden" asp-for="Ja.Verifikovan">
-        <input style="float: right;" type="hidden" asp-for="idStof">
-        <input type="hidden" asp-for="stofZaIzmenuID">
-        <input type="hidden" asp-for="stofZaIzmenu.URLSlike">
+    <input style="float: right;" type="hidden" asp-for="idStof">
+    <input type="hidden" asp-for="stofZaIzmenuID">
+    <input type="hidden" asp-for="stofZaIzmenu.URLSlike">
 
 
 
     @*PROVERIIII*@
-        @*<input type="hidden" asp-for="stofZaIzmenu.ProdavacID">*@
+    @*<input type="hidden" asp-for="stofZaIzmenu.ProdavacID">*@
 
 
 
 
-        <input type="hidden" asp-for="stofZaIzmenu.ID">
-        @* <label style="float: right;margin-top: 10px;">Naziv štofa :</label>
+    <input type="hidden" asp-for="stofZaIzmenu.ID">
+    @* <label style="float: right;margin-top: 10px;">Naziv štofa :</label>
         <input  style="float: right;margin-top: 10px;"type="text" asp-for="stofZaIzmenu.Naziv">
         <label style="float: right;margin-top: 10px;">Cena po metru kvadratnom :</label>
         <input style="float: right;margin-top: 10px;" type="number" asp-for="stofZaIzmenu.CenaPoMetruKvadratnom"> *@
-        @* <input  style="float: right;margin-top: 10px;"type="checkbox" asp-for="PromeniSliku">
+    @* <input  style="float: right;margin-top: 10px;"type="checkbox" asp-for="PromeniSliku">
         <label style="float: right;margin-top: 10px;">Slika :</label>
         <input style="float: right;margin-top: 10px;" class="btn btn-warning" type="file" asp-for="SlikaStofa">
         <button style="float: right;margin-top: 10px;" class="btn btn-warning" type="submit" asp-page-handler="Izmeni">Izmeni štof</button>
         <label style="float: right;margin-top: 10px;">Svi tipovi štofa :</label>
         @foreach (var tip in @Model.tipoviStofa)
         {
-            <div style="display: flex;flex-direction: row;justify-content: space-evenly;"> 
+            <div style="display: flex;flex-direction: row;justify-content: space-evenly;">
               <div style="margin-top: 10px;width: 100px;float: right;">
                 <label>@tip.SifraStofa</label>
               </div>
@@ -93,36 +93,34 @@
             </div>
         } *@
 
-         <div style="margin-top: 10px" class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic1">Naziv štofa : </span>
-            </div>
-            <input type="text" class="form-control" asp-for="stofZaIzmenu.Naziv"  aria-describedby="basic1">
+    <div style="margin-top: 10px" class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic1">Naziv štofa : </span>
         </div>
-    
+        <input type="text" class="form-control" asp-for="stofZaIzmenu.Naziv" aria-describedby="basic1">
+    </div>
+
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic2">Cena po metru kvadratnom :</span>
         </div>
-        <input class="form-control" type="number" asp-for="stofZaIzmenu.CenaPoMetruKvadratnom"  aria-describedby="basic2">
+        <input class="form-control" type="number" asp-for="stofZaIzmenu.CenaPoMetruKvadratnom" aria-describedby="basic2">
     </div>
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic7">Promeni sliku ? </span>
         </div>
-        <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="PromeniSliku" aria-describedby="basic7">
+        <input id="cena" type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="PromeniSliku" aria-describedby="basic7">
     </div>
 
-    <div class="input-group mb-3">
-        <div style="height: 38px;" class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Slika : </span>
+    <div style="margin-top: 10px" class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic1">Slika proizvoda : </span>
         </div>
-        <div class="custom-file">
-            <input type="text" asp-for="stofZaIzmenu.URLSlike" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputGroupFile01">Odaberite fajl</label>
-        </div>
+        <input type="text" class="form-control" asp-for="stofZaIzmenu.URLSlike" aria-describedby="basic1">
     </div>
+
     @*<script>
             $('#inputGroupFile01').on('change',function(){
                 //get the file name
@@ -132,12 +130,12 @@
             })
         </script>*@
 
-        <button style="float: right;margin-bottom: 10px"  class="btn btn-warning" type="submit" asp-page-handler="Izmeni">Izmeni štof</button>
-        <label >Svi tipovi štofa : </label>
-        
-        @foreach (var tip in @Model.tipoviStofa)
-        {
-            @* <div style="display: flex;flex-direction: row;justify-content: space-evenly;"> 
+    <button style="float: right;margin-bottom: 10px" class="btn btn-warning" type="submit" asp-page-handler="Izmeni">Izmeni štof</button>
+    <label>Svi tipovi štofa : </label>
+
+    @foreach (var tip in @Model.tipoviStofa)
+    {
+        @* <div style="display: flex;flex-direction: row;justify-content: space-evenly;">
               <div style="margin-top: 10px;width: 100px;float: right;">
                 <label>@tip.SifraStofa</label>
               </div>
@@ -147,15 +145,15 @@
             </div> *@
 
 
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" value="@tip.SifraStofa" aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
-              <div class="input-group-append">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" value="@tip.SifraStofa" aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
+            <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit" asp-page-handler="Obrisi" asp-route-idTip="@tip.ID" id="button-addon22">Obrisi</button>
-              </div>
             </div>
-        }
-       
-    
+        </div>
+    }
+
+
 </form>
 </div>
     @if(@Model.Ucitano==false)

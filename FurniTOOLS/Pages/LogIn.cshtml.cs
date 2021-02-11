@@ -63,7 +63,64 @@ namespace WEBFurniTOOLS
                 }
 
             }
-            return Page();
+            else if (Type == 1)
+            {
+                var coll = _db.GetCollection<Kupac>("Kupci");
+                var filter1 = (Builders<Kupac>.Filter.Eq(x => x.Email, Email) & Builders<Kupac>.Filter.Eq(x => x.Sifra, Password));
+                //var filter2 = Builders<Administrator>.Filter.Eq("sifra", Password);
+
+                var result = await coll.Find(filter1).ToListAsync();
+                var kupac = result.SingleOrDefault();
+                if (kupac != null && Password == kupac.Sifra)
+                {
+                    HttpContext.Session.SetString("idKupac", kupac.ID.ToString());
+                    HttpContext.Session.SetString("pageSize", Convert.ToString(5));
+
+                    HttpContext.Session.SetString("imeKupca", kupac.Ime);
+                    HttpContext.Session.SetString("prezimeKupca", kupac.Prezime);
+                    HttpContext.Session.SetString("emailKupca", kupac.Email);
+                    return RedirectToPage("./KupacRP/KupacHomePage");
+                }
+                else
+                {
+                    Message = "Email i sifra se ne poklapaju!";
+                    return Page();
+                }
+            }
+            else
+            {
+                var coll = _db.GetCollection<Prodavac>("Prodavci");
+                var filter1 = (Builders<Prodavac>.Filter.Eq(x => x.Email, Email) & Builders<Prodavac>.Filter.Eq(x => x.Sifra, Password));
+                //var filter2 = Builders<Administrator>.Filter.Eq("sifra", Password);
+
+                var result = await coll.Find(filter1).ToListAsync();
+                var prodavac = result.SingleOrDefault();
+                if (prodavac != null && Password == prodavac.Sifra)
+                {
+                    if (!prodavac.Verifikovan)
+                    {
+                        Message = "Nalog vam jos nije verifikovan!";
+                        return Page();
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("idProdavac", prodavac.ID.ToString());
+                        HttpContext.Session.SetString("pageSize", Convert.ToString(5));
+
+                        HttpContext.Session.SetString("imeProdavca", prodavac.Ime);
+                        HttpContext.Session.SetString("prezimeProdavca", prodavac.Prezime);
+                        HttpContext.Session.SetString("emailProdavca", prodavac.Email);
+
+                        return RedirectToPage("./ProdavacRP/ProdavacHomePage");
+                    }
+                }
+                else
+                {
+                    Message = "Email i sifra se ne poklapaju!";
+                    return Page();
+                }
+            }
+           
         }
     }
 }

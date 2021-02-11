@@ -25,7 +25,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         [BindProperty]
         public Kupac Ja { get; set; }
         public List<Narudzbina> narudzbine { get; set; }
-        public int? idKupac { get; set; }
+        public string idKupac { get; set; }
         private readonly IMongoDatabase _db;
         public KupacHomePageModel(IDatabaseSettings settings)
         {
@@ -39,11 +39,14 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
+            Console.WriteLine(HttpContext.Session.GetString("idKupac"));
+
             if (log)
             {
-                idKupac = idLog;
+                idKupac = HttpContext.Session.GetString("idKupac");
+
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 Ja = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
 
@@ -55,32 +58,35 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 
                 var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
                 List<Narudzbina> pom = new List<Narudzbina>();
-                foreach (MongoDBRef n in Ja.MojeNarudzbine_)
+                if (Ja.MojeNarudzbine_ != null)
                 {
-                    var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
-                    Narudzbina npom = coll2.Find(filter).SingleOrDefault();
-                    pom.Add(npom);
-                    if (npom.Status=="Korpa")
+                    foreach (MongoDBRef n in Ja.MojeNarudzbine_)
                     {
-                        Korpa++;
+                        var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
+                        Narudzbina npom = coll2.Find(filter).SingleOrDefault();
+                        pom.Add(npom);
+                        if (npom.Status == "Korpa")
+                        {
+                            Korpa++;
+                        }
+                        else if (npom.Status == "Naruceno")
+                        {
+                            Naruceno++;
+                        }
+                        else if (npom.Status == "Isporuceno")
+                        {
+                            Isporuceno++;
+                        }
+                        else if (npom.Status == "Potvrdjeno")
+                        {
+                            Potvrdjeno++;
+                        }
+                        else if (npom.Status == "Odbijeno")
+                        {
+                            Odbijeno++;
+                        }
+
                     }
-                    else if (npom.Status=="Naruceno")
-                    {
-                        Naruceno++;
-                    }
-                    else if (npom.Status=="Isporuceno")
-                    {
-                        Isporuceno++;
-                    }
-                    else if (npom.Status=="Potvrdjeno")
-                    {
-                        Potvrdjeno++;
-                    }
-                    else if (npom.Status=="Odbijeno")
-                    {
-                        Odbijeno++;
-                    }
-                    
                 }
                 Ja.MojeNarudzbine = pom;
                 
@@ -93,8 +99,8 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
                 HttpContext.Session.Remove("idKupac");

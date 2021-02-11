@@ -14,16 +14,15 @@ using System.ComponentModel.DataAnnotations.Schema;
         [BsonElement("profilkorisnika")]
         public MongoDBRef ProfilKorisnika { get; set; }
         [BsonElement("narucenstof")]
-        public MongoDBRef NarucenStof { get; set; }
+        public Stof NarucenStof { get; set; }
         [BsonElement("narucenproizvod")]
-        public MongoDBRef NarucenProizvod { get; set; }
+        public Proizvod NarucenProizvod_ { get; set; }
 
         [BsonIgnore]
         public Kupac ProfilKorisnika_ { get; set; }
-        [BsonIgnore]
+        [BsonElement("narucentipstofa")]
         public TipStofa NarucenStof_ { get; set; }
-        [BsonIgnore]
-        public Proizvod NarucenProizvod_ { get; set; }
+       
 
 
 
@@ -50,7 +49,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         {
         double dodatak = 0;
         if (NarucenStof_ != null)
-            dodatak += NarucenStof_.MojiStof_.CenaPoMetruKvadratnom * NarucenProizvod_.PovrsinaMaterijala;
+            dodatak += NarucenStof.CenaPoMetruKvadratnom * NarucenProizvod_.PovrsinaMaterijala;
         return Kolicina * (NarucenProizvod_.CenaPoKomadu + dodatak);
         return 0;
         }

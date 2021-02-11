@@ -14,7 +14,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
     {
         [BindProperty]
         public Kupac Ja { get; set; }        
-        public int? idKupac { get; set; }
+        public string idKupac { get; set; }
         private readonly IMongoDatabase _db;
         public List<Narudzbina> Narudzbine { get; set; }
         public int? IzabraniID { get; set; }
@@ -30,26 +30,30 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
-                idKupac = idLog;
+                idKupac = HttpContext.Session.GetString("idKupac");
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 Ja = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
 
                 var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
                 List<Narudzbina> pom = new List<Narudzbina>();
-                foreach (MongoDBRef n in Ja.MojeNarudzbine_)
+                if (Ja.MojeNarudzbine_ != null)
                 {
-                    var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
-                    Narudzbina npom = coll2.Find(filter).SingleOrDefault();
-                    if (npom.Status != "Korpa")
+                    foreach (MongoDBRef n in Ja.MojeNarudzbine_)
                     {
-                        pom.Add(npom);
+                        var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
+                        Narudzbina npom = coll2.Find(filter).SingleOrDefault();
+                        if (npom.Status != "Korpa")
+                        {
+                            pom.Add(npom);
+                        }
                     }
                 }
                 Ja.MojeNarudzbine = pom;
+                Narudzbine = pom;
                 IzabraniID = null;
                 return Page();
             }
@@ -58,14 +62,14 @@ namespace WEBFurniTOOLS.Pages.KupacRP
                 return RedirectToPage("../Index");
             }
         }
-        public async Task<IActionResult> OnPostObrisi(int id)
+        public async Task<IActionResult> OnPostObrisi(string id)
         {
 
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
-                idKupac = idLog;
+                idKupac = HttpContext.Session.GetString("idKupac");
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 Kupac pom1 = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
 
@@ -93,8 +97,8 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
                 HttpContext.Session.Remove("idKupac");

@@ -103,7 +103,7 @@ input[type=range] {
               <div class="input-group-prepend">
                   <span class="input-group-text" id="basic7">Da li želite opseg cena? </span>
               </div>
-            <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="Cena" aria-describedby="basic7">
+            <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="Cena" name="Cena" aria-describedby="basic7">
         </div>
         <div class="input-group input-group-sm mb-3">
               <div   style="height:28px" class="input-group-prepend">
@@ -220,7 +220,7 @@ input[type=range] {
   </script>
           <input type="hidden" asp-for="CenaDO">
   <input type="hidden" asp-for="CenaOD">
-  <input type="hidden" asp-for="Cena">
+  @*<input type="hidden" asp-for="Cena">*@
     <div style="margin-top:10px;width: 100%;display: flex;flex-direction: row;justify-content: space-around;align-items: center;">
       <input style="height: 35px;width: 120px;"  class="btn btn-warning my-2 my-sm-0" asp-page-handler="Pretrazi" type="submit" value="Pretrazi">
     </div>  
@@ -308,7 +308,7 @@ input[type=range] {
               <label>Cena: @item.CenaPoKomadu€</label>
             </div>
             <div >
-              <button type="submit" asp-route-id="@item.ID" class="btn btn-warning" asp-page="./Narudzbenica">Pogledaj</button>
+              <button type="submit" asp-route-id="@item.Sifra" asp-route-prodavac="@item.MojProdavac_.ID" class="btn btn-warning" asp-page="./Narudzbenica">Pogledaj</button>
             </div>
         </div>
     <br>

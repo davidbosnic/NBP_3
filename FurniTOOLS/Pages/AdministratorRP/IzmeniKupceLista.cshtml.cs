@@ -13,7 +13,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
     public class IzmeniKupceListaModel : PageModel
     {
         public string ImeAdmina { get; set; }
-        public int? idAdmin{get;set;}
+        public string idAdmin{get;set;}
         private readonly IMongoDatabase _db;
         public PaginatedList<Kupac> Kupci { get; set; }
 
@@ -34,11 +34,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<IActionResult> OnGet(int? pageIndex)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 var coll = _db.GetCollection<Administrator>("Admins");
                 var res = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
                 ImeAdmina = res.Mail;
@@ -60,8 +60,8 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
 
          public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
                 Console.WriteLine(pageInput + "++++++++++");
@@ -74,8 +74,8 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
                 HttpContext.Session.SetString("pageSize", brEl.ToString());
@@ -86,13 +86,13 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
                 return RedirectToPage("../Index");
             }
         }
-        public async Task<ActionResult> OnPostObrisiKupca(int id)
+        public async Task<ActionResult> OnPostObrisiKupca(string id)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 var coll2 = _db.GetCollection<Kupac>("Kupci");
                 Kupac zaBrisanje = coll2.Find(x=>x.ID==id.ToString()).SingleOrDefault();
                 if (zaBrisanje != null)
@@ -108,8 +108,8 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
                 HttpContext.Session.Remove("idAdmin");

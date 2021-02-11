@@ -25,64 +25,63 @@
     
     <div class="container">
         <h1>Novi proizvod</h1>
-    <div>@Model.ErrorMessage1</div>
-    <div>@Model.ErrorMessage2</div>
-    <input type="hidden" asp-for="idProdavac">
+        <div>@Model.ErrorMessage1</div>
+        <div>@Model.ErrorMessage2</div>
+        <input type="hidden" asp-for="idProdavac">
 
-    <div style="margin-top: 10px" class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic1">Naziv : </span>
+        <div style="margin-top: 10px" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic1">Naziv : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="noviProizvod.Naziv" aria-describedby="basic1">
         </div>
-        <input type="text" class="form-control" asp-for="noviProizvod.Naziv"  aria-describedby="basic1">
-    </div>
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic2">Šifra proizvoda : </span>
-        </div>
-        <input type="text" class="form-control" asp-for="noviProizvod.Sifra"  aria-describedby="basic2">
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic3">Površina pod stofom : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic2">Šifra proizvoda : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="noviProizvod.Sifra" aria-describedby="basic2">
         </div>
-        <input  class="form-control" step="any" type="number" min="0" asp-for="noviProizvod.PovrsinaMaterijala" aria-describedby="basic3">
-    </div>
 
-
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic4">Visina baze : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic3">Površina pod stofom : </span>
+            </div>
+            <input class="form-control" step="any" type="number" min="0" asp-for="noviProizvod.PovrsinaMaterijala" aria-describedby="basic3">
         </div>
-        <input type="number" min="0" class="form-control" asp-for="noviProizvod.VisinaBaze"  aria-describedby="basic4">
-    </div>
 
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic5">Visina naslona : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic4">Visina baze : </span>
+            </div>
+            <input type="number" min="0" class="form-control" asp-for="noviProizvod.VisinaBaze" aria-describedby="basic4">
         </div>
-        <input type="number" min="0" class="form-control" asp-for="noviProizvod.VisinaNaslona" aria-describedby="basic5">
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic6">Cena po komadu : </span>
-        </div>
-        <input type="number" min="0" class="form-control" asp-for="noviProizvod.CenaPoKomadu" aria-describedby="basic6">
-    </div>
 
-    <div class="input-group mb-3">
-        <div style="height: 38px;" class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Slika proizvoda : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic5">Visina naslona : </span>
+            </div>
+            <input type="number" min="0" class="form-control" asp-for="noviProizvod.VisinaNaslona" aria-describedby="basic5">
         </div>
-        <div class="custom-file">
-            <input type="text" asp-for="noviProizvod.URLSlike" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputGroupFile01">URL Slike</label>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic6">Cena po komadu : </span>
+            </div>
+            <input type="number" min="0" class="form-control" asp-for="noviProizvod.CenaPoKomadu" aria-describedby="basic6">
         </div>
-    </div>
-    @*<script>
+
+        <div style="margin-top: 10px" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic1">Slika proizvoda : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="noviProizvod.URLSlike" aria-describedby="basic1">
+        </div>
+
+        
+        @*<script>
             $('#inputGroupFile01').on('change',function(){
                 //get the file name
                 var fileName = $(this).val().replace('C:\\fakepath\\', " ");
@@ -90,16 +89,16 @@
                 $(this).next('.custom-file-label').html(fileName);
             })
         </script>*@
-    
 
-    @* <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic7">Slika proizvoda : </span>
-        </div>
-        <input type="file" asp-for="Slika" id="r1" class="form-control" aria-describedby="basic7">
-    </div>   *@
-    <input class="btn btn-warning" type="hidden" asp-for=nebitno value="bezveze"> 
-    <input class="btn btn-warning" style="margin-top: 10px;float: right;" class="btn btn-warning" type="submit" asp-page-handler="Dodaj" value="Dodaj proizvod">  
+
+        @* <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic7">Slika proizvoda : </span>
+            </div>
+            <input type="file" asp-for="Slika" id="r1" class="form-control" aria-describedby="basic7">
+        </div>   *@
+        <input class="btn btn-warning" type="hidden" asp-for=nebitno value="bezveze">
+        <input class="btn btn-warning" style="margin-top: 10px;float: right;" class="btn btn-warning" type="submit" asp-page-handler="Dodaj" value="Dodaj proizvod">
     </div>
     @* </div> *@
 </form>

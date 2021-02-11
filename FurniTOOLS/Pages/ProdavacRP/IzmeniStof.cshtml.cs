@@ -18,7 +18,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         private readonly IMongoDatabase _db;
         [BindProperty(SupportsGet=true)]
         public int idStof { get; set; }
-        public int? idProdavac{get;set;}
+        public string idProdavac{get;set;}
         [BindProperty(SupportsGet=true)]
         public Stof stofZaIzmenu{get;set;}
         [BindProperty(SupportsGet=true)]
@@ -59,48 +59,48 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         {
             return HttpContext.Session.GetString(param);
         }
-        public async Task<ActionResult> OnGet(int id)
-        {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
-            if (log)
-            {   //VAZNO !!! Ovde da vidimo da li po imenu da ga trazimo posto nema ID
-                idProdavac = idLog;
-                var coll = _db.GetCollection<Prodavac>("Prodavci");
+        //public async Task<ActionResult> OnGet(string naziv)
+        //{
+        //    string idLog;
+        //    bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
+        //    if (log)
+        //    {   //VAZNO !!! Ovde da vidimo da li po imenu da ga trazimo posto nema ID
+        //        idProdavac = HttpContext.Session.GetString("idProdavac");
+        //        var coll = _db.GetCollection<Prodavac>("Prodavci");
        
-                Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
-                foreach (Stof s in pom.MojiStofovi)
-                {
-                    //ovo treba se menja
-                    if (s.Naziv == id.ToString())
-                    {
-                        stofZaIzmenu = s;
-                    }
-                }
-                tipoviStofa = stofZaIzmenu.MojiTipovi.ToArray();
+        //        Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
+        //        foreach (Stof s in pom.MojiStofovi)
+        //        {
+        //            //ovo treba se menja
+        //            if (s.Naziv == id.ToString())
+        //            {
+        //                stofZaIzmenu = s;
+        //            }
+        //        }
+        //        tipoviStofa = stofZaIzmenu.MojiTipovi.ToArray();
 
-                Ja = pom;
-                return Page();
-            }
-            else
-            {
-                return RedirectToPage("../Index");
-            }
-        }
-        public async Task<ActionResult> OnPost(int id)
+        //        Ja = pom;
+        //        return Page();
+        //    }
+        //    else
+        //    {
+        //        return RedirectToPage("../Index");
+        //    }
+        //}
+        public async Task<ActionResult> OnPost(string naziv)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {   //VAZNO !!! Ovde da vidimo da li po imenu da ga trazimo posto nema ID
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
 
-                Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
+                Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
                 foreach (Stof s in pom.MojiStofovi)
                 {
                     //ovo treba se menja
-                    if (s.Naziv == id.ToString())
+                    if (s.Naziv == naziv)
                     {
                         stofZaIzmenu = s;
                     }
@@ -117,19 +117,19 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostDodajAsync()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Prodavac pom = coll.Find(x=>x.ID==idProdavac.ToString()).FirstOrDefault();
-                stofZaIzmenu.Prodavac_ = new MongoDBRef("mojprodavac", idLog.ToString());
+                stofZaIzmenu.Prodavac_ = new MongoDBRef("mojprodavac", idProdavac.ToString());
                 stofZaIzmenu.MojiTipovi.Add(tipZaDodavanje);
-                coll.ReplaceOne(x => x.ID == idLog.ToString(), pom);
+                coll.ReplaceOne(x => x.ID == idProdavac.ToString(), pom);
                 tipZaDodavanje = null;
                 //ako menjamo da je preko ime onda i ovde izmena
-                return RedirectToPage("./IzmeniStof", new { id = stofZaIzmenuID });
+                return RedirectToPage("./IzmeniStof", new { naziv = stofZaIzmenu.Naziv });
                 
             }
             else
@@ -140,14 +140,14 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public async Task<ActionResult> OnPostObrisiAsync(int idTip)
         {
             //OVA CELA MORA SE MENJA
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 idStof = idTip;
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
-                Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
+                Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
 
                 
 
@@ -161,12 +161,12 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public async Task<ActionResult> OnPostIzmeniAsync()
         {
             //I ova cela ne moze ovako, mozda bolje da se obrisu ove stranice za izmenu ako nas mnogo kecaju xD
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             //tipoviStofa = _db.TipoviStofova.Where(x => x.MojiStof_.ID == stofZaIzmenuID).ToArray();
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 
                         ErrorMessage1 = "";
                         ErrorMessage2 = "";
@@ -184,8 +184,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

@@ -130,10 +130,10 @@
     {
         foreach (var item in Model.Stofovi)
         {
-            @if(item.MojiTipovi!=null && item.MojiTipovi.Count!=0)                        
+            @if (item.MojiTipovi != null && item.MojiTipovi.Count != 0)
             @foreach (var i in item.MojiTipovi)
             {
-                <option data-img_src="@item.URLSlike" value="@i.ID">@item.Naziv - @i.SifraStofa</option>
+                <option data-img_src="@item.URLSlike" value="@item.Naziv @i.SifraStofa">@item.Naziv - @i.SifraStofa</option>
             }         
         }
     }

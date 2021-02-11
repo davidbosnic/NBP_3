@@ -19,7 +19,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public bool Ucitano { get; set; }
         private readonly IMongoDatabase _db;
 
-        public int? idProdavac{get;set;}
+        public string idProdavac{get;set;}
 
         //[BindProperty]
         //public IFormFile SlikaStofa{get;set;}
@@ -57,11 +57,11 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Ja = coll.Find(x=>x.ID==idProdavac.ToString()).SingleOrDefault();
 
@@ -76,11 +76,11 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public async Task<ActionResult> OnPostPrimeniAsync()
         {
             Console.WriteLine(brojTipova);
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 if (brojTipova != null)
                 {
                     ErrorMessage1 = "";
@@ -100,22 +100,26 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostDodajAsync()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 
                         ErrorMessage1 = "";
                         ErrorMessage2 = "";
                         ErrorMessage3 = "";
-
-                         var coll = _db.GetCollection<Prodavac>("Prodavci");
-                         Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
+                idProdavac = HttpContext.Session.GetString("idProdavac");
+                var coll = _db.GetCollection<Prodavac>("Prodavci");
+                         Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
                         stofZaDodavanje.MojiTipovi = tipoviZaDodavanje.ToList();
-                        stofZaDodavanje.Prodavac_ = new MongoDBRef("mojprodavac", idLog.ToString());
-                         pom.MojiStofovi.Add(stofZaDodavanje);
+                        stofZaDodavanje.Prodavac_ = new MongoDBRef("mojprodavac", idProdavac.ToString());
+                if (pom.MojiStofovi == null)
+                {
+                    pom.MojiStofovi = new List<Stof>();
+                }
+                pom.MojiStofovi.Add(stofZaDodavanje);
 
-                        coll.ReplaceOne(x => x.ID == idLog.ToString(), pom);
+                        coll.ReplaceOne(x => x.ID == idProdavac.ToString(), pom);
 
                         return RedirectToPage("./MojiStofovi");
 
@@ -127,8 +131,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

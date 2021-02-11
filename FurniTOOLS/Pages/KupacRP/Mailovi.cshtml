@@ -15,15 +15,16 @@
   <div class="square_box box_four"></div>
   <div class="container mt-5">
     <div class="row">
-
+        @if (Model.Narudzbine != null)
+        {
       @foreach (var item in @Model.Narudzbine)
       {
-        @if (item.Procitana==false)
+        @if (item.Procitana == false)
         {
-            
+
           <form method="POST">
-            @if (item.Status=="Potvrdjeno")
-              {
+            @if (item.Status == "Potvrdjeno")
+            {
                 <div class="col-sm-12">
                 <div class="alert fade alert-simple alert-primary alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
                   <i class="start-icon fa fa-thumbs-up faa-bounce animated"></i>
@@ -32,8 +33,8 @@
                   </div>
               </div>
 
-              }
-              @if (item.Status=="Isporuceno")
+            }
+              @if (item.Status == "Isporuceno")
               {
               <div class="col-sm-12">
                 <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
@@ -43,7 +44,7 @@
                 </div>
               </div>
               }
-              @if (item.Status=="Odbijeno")
+              @if (item.Status == "Odbijeno")
               {
               <div class="col-sm-12">
                 <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
@@ -53,7 +54,7 @@
                 </div>
               </div>
               }
-              @if (item.Status=="Narucen")
+              @if (item.Status == "Narucen")
               {
               <div class="col-sm-12">
                 <div class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
@@ -64,9 +65,10 @@
               </div>
               }
           </form>
-              
-      }
-        }      
+
+        }
+      }      
+        }
     </div>
   </div>
 </section>

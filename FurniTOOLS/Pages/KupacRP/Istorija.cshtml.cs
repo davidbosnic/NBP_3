@@ -15,7 +15,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         [BindProperty]
         public Kupac Ja { get; set; }        
         public PaginatedList<Narudzbina> narudzbine { get; set; }
-        public int? idKupac { get; set; }
+        public string idKupac { get; set; }
         private readonly IMongoDatabase _db;
 
         [BindProperty]
@@ -37,23 +37,28 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet(int? pageIndex)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
-                idKupac = idLog;
+                idKupac = HttpContext.Session.GetString("idKupac");
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 Ja = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
 
                 var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
                 List<Narudzbina> pom=new List<Narudzbina>();
-                foreach (MongoDBRef n in Ja.MojeNarudzbine_)
+                if (Ja.MojeNarudzbine_ != null)
                 {
-                    var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
-                    Narudzbina npom = coll2.Find(filter).SingleOrDefault();
-                    if (npom.Status != "Korpa")
+
+
+                    foreach (MongoDBRef n in Ja.MojeNarudzbine_)
                     {
-                        pom.Add(npom);
+                        var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
+                        Narudzbina npom = coll2.Find(filter).SingleOrDefault();
+                        if (npom.Status != "Korpa")
+                        {
+                            pom.Add(npom);
+                        }
                     }
                 }
                 Ja.MojeNarudzbine = pom;
@@ -73,8 +78,8 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
                 Console.WriteLine(pageInput + "++++++++++");
@@ -87,8 +92,8 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
                 HttpContext.Session.SetString("pageSize", brEl.ToString());
@@ -101,8 +106,8 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
          public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idKupac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
                 HttpContext.Session.Remove("idKupac");

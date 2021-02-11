@@ -15,7 +15,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         private readonly IMongoDatabase _db;
         [BindProperty]
         public Prodavac Ja { get; set; } 
-        int? idProdavac {get;set;}
+        string idProdavac {get;set;}
         public ProdavacHomePageModel(IDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
@@ -28,11 +28,11 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 
                 Ja = coll.Find(x => x.ID == idProdavac.ToString()).SingleOrDefault();
@@ -45,19 +45,19 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzloguj()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 HttpContext.Session.Remove("idProdavac");
             }
             return RedirectToPage("../Index");
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

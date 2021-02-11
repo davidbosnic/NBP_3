@@ -23,7 +23,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         [BindProperty]
         public string ErrorMessage2{get;set;}
         [BindProperty]
-        public int? idProdavac{get;set;}
+        public string idProdavac{get;set;}
 
         [BindProperty(SupportsGet=true)]
         public Proizvod noviProizvod{get;set;}
@@ -48,11 +48,11 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-                idProdavac = idLog;
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Ja = coll.Find(x=>x.ID==idProdavac.ToString()).SingleOrDefault();
                 
@@ -66,22 +66,25 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostDodaj()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
-
+                idProdavac = HttpContext.Session.GetString("idProdavac");
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
-                Prodavac pom = coll.Find(x=>x.ID==idLog.ToString()).FirstOrDefault();
-
-                noviProizvod.MojProdavac = new MongoDBRef("mojprodavac", idLog.ToString());
+                Prodavac pom = coll.Find(x=>x.ID==idProdavac.ToString()).FirstOrDefault();
+                if (pom.MojiProizvodi==null)
+                {
+                    pom.MojiProizvodi = new List<Proizvod>();
+                }
+                noviProizvod.MojProdavac = new MongoDBRef("mojprodavac", idProdavac.ToString());
                 pom.MojiProizvodi.Add(noviProizvod);
 
 
                 ErrorMessage1 = "";
                 ErrorMessage2 = "";
 
-                coll.ReplaceOne(x => x.ID == idLog.ToString(), pom);
+                coll.ReplaceOne(x => x.ID == idProdavac.ToString(), pom);
                 return RedirectToPage("./ProdavacHomePage");
            
             }
@@ -89,8 +92,8 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idProdavac"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 HttpContext.Session.Remove("idProdavac");

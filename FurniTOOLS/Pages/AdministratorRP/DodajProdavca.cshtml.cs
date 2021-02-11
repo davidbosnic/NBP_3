@@ -13,7 +13,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
     public class DodajProdavcaModel : PageModel
     {
         public string ImeAdmina { get; set; }
-        public int? idAdmin{get;set;}
+        public string idAdmin{get;set;}
         private readonly IMongoDatabase _db;
         [BindProperty]
         public Prodavac noviProdavac{get;set;}
@@ -36,11 +36,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 var coll = _db.GetCollection<Administrator>("Admins");
                 var res = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
                 ImeAdmina = res.Mail;
@@ -53,11 +53,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostDodaj()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 if (!ModelState.IsValid)
                 {
                     return Page();
@@ -88,8 +88,8 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
                 HttpContext.Session.Remove("idAdmin");

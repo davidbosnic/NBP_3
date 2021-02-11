@@ -14,7 +14,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
     {
         public bool Ucitano { get; set; }
         public string ImeAdmina { get; set; }
-        public int? idAdmin{get;set;}
+        public string idAdmin{get;set;}
         private readonly IMongoDatabase _db;
 
         [BindProperty(SupportsGet=true)]
@@ -36,11 +36,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnGet()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 
                 var coll = _db.GetCollection<Administrator>("Admins");
                 var res = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
@@ -62,11 +62,11 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostIzmeniSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
-                idAdmin = idLog;
+                idAdmin = HttpContext.Session.GetString("idAdmin");
                 if (ModelState.IsValid)
                 {
                     var coll = _db.GetCollection<Administrator>("Admins");
@@ -102,8 +102,8 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            int idLog;
-            bool log = int.TryParse(HttpContext.Session.GetString("idAdmin"), out idLog);
+            string idLog;
+            bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
                 HttpContext.Session.Remove("idAdmin");
