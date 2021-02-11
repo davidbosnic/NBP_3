@@ -178,3 +178,5 @@ C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\bin\Debug\net5.0\runtimes\win\
 C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.Views.pdb
 C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.csproj.CopyComplete
 C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.genruntimeconfig.cache
+C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\ListaPristiglihNarudzbina.cshtml.g.cs
+C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\PrikazNarudzbine.cshtml.g.cs

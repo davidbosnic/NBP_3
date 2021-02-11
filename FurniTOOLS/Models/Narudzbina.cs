@@ -40,8 +40,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         public DateTime KrajnjiRokIsporuke { get; set; }
         [BsonElement("status")]
         public string Status { get; set; }
-        [BsonElement("napomena")]
-        public string Napomena { get; set; }
+       
         [BsonElement("procitana")]
     public bool Procitana { get; set; }
 

@@ -103,15 +103,25 @@ namespace WEBFurniTOOLS.Pages.KupacRP
                 Kupac pom1 = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
                 var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
 
+                var coll3 = _db.GetCollection<Prodavac>("Prodavci");
+                
                 if (pom1.MojeNarudzbine_ != null)
                 {
                     foreach (MongoDBRef n in pom1.MojeNarudzbine_.ToList())
                     {
                         var filter = Builders<Narudzbina>.Filter.Eq(e => e.ID, n.Id.AsString);
                         Narudzbina npom = coll2.Find(filter).SingleOrDefault();
+
                         if (npom.Status == "Korpa")
                         {
+                            Prodavac pommm = coll3.Find(x => x.ID == npom.NarucenProizvod_.MojProdavac.Id.AsString).SingleOrDefault();
                             npom.Status = "Narucen";
+                            if (pommm.MojeNarudzbine==null)
+                            {
+                                pommm.MojeNarudzbine = new List<MongoDBRef>();
+                            }
+                            pommm.MojeNarudzbine.Add(new MongoDBRef("mojenarudzbine", npom.ID));
+                            coll3.ReplaceOne(x => x.ID == pommm.ID, pommm);
                             coll2.ReplaceOne(x => x.ID == npom.ID, npom);
                         }
                     }

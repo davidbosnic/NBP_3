@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,65 +35,74 @@
     }
   </style> 
   <div id="wrapper">
-    <ul class="navbar-nav gradijent sidebar sidebar-dark accordion" id="accordionSidebar">
-      <a style="color: ffc107;" class="sidebar-brand d-flex align-items-center justify-content-center" href="./ProdavacHomePage">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i style="background-color: ffc107;" class="fas fa-laugh-wink"></i>
-        </div>
-        <div  class="sidebar-brand-text mx-3">@RenderSection("ImeProdavca")</div>
-      </a>
-      <hr class="sidebar-divider my-0">
+      <ul class="navbar-nav gradijent sidebar sidebar-dark accordion" id="accordionSidebar">
+          <a style="color: ffc107;" class="sidebar-brand d-flex align-items-center justify-content-center" href="./ProdavacHomePage">
+              <div class="sidebar-brand-icon rotate-n-15">
+                  <i style="background-color: ffc107;" class="fas fa-laugh-wink"></i>
+              </div>
+              <div class="sidebar-brand-text mx-3">@RenderSection("ImeProdavca")</div>
+          </a>
+          <hr class="sidebar-divider my-0">
 
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="./ProdavacHomePage">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Početna strana</span></a>
-      </li>
+          <!-- Nav Item - Dashboard -->
+          <li class="nav-item active">
+              <a class="nav-link" href="./ProdavacHomePage">
+                  <i class="fas fa-fw fa-tachometer-alt"></i>
+                  <span>Početna strana</span>
+              </a>
+          </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
+          <!-- Divider -->
+          <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Meni
-      </div>
-
-
-      <li style="cursor:pointer;" class="nav-item">
-        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Moji proizvodi</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div style="background-color: #ffc107;" class=" py-2 collapse-inner rounded">
-            <a class="collapse-item collapse-item2" href="./DodajProizvod">Dodaj proizvod</a>
-            <a class="collapse-item collapse-item2" href="./MojiProizvodi">Moji proizvodi</a>
+          <!-- Heading -->
+          <div class="sidebar-heading">
+              Meni
           </div>
-        </div>
-      </li>
-       <li style="cursor:pointer;" class="nav-item">
-        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Moji štofovi</span>
-        </a>
-        <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div style="background-color: #ffc107;" class=" py-2 collapse-inner rounded">
-            <a class="collapse-item collapse-item2" href="./DodajStof">Dodaj štof</a>
-            <a class="collapse-item collapse-item2" href="./MojiStofovi">Moji štofovi</a>
+
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="./ListaPristiglihNarudzbina">
+                  <i class="fas fa-tags"></i>
+                  <span>Lista narudzbina</span>
+              </a>
+          </li>
+
+
+          <li style="cursor:pointer;" class="nav-item">
+              <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  <i class="fas fa-fw fa-cog"></i>
+                  <span>Moji proizvodi</span>
+              </a>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                  <div style="background-color: #ffc107;" class=" py-2 collapse-inner rounded">
+                      <a class="collapse-item collapse-item2" href="./DodajProizvod">Dodaj proizvod</a>
+                      <a class="collapse-item collapse-item2" href="./MojiProizvodi">Moji proizvodi</a>
+                  </div>
+              </div>
+          </li>
+          <li style="cursor:pointer;" class="nav-item">
+              <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <i class="fas fa-fw fa-cog"></i>
+                  <span>Moji štofovi</span>
+              </a>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                  <div style="background-color: #ffc107;" class=" py-2 collapse-inner rounded">
+                      <a class="collapse-item collapse-item2" href="./DodajStof">Dodaj štof</a>
+                      <a class="collapse-item collapse-item2" href="./MojiStofovi">Moji štofovi</a>
+                  </div>
+              </div>
+
+          </li>
+
+          <!-- Divider -->
+          <hr class="sidebar-divider d-none d-md-block">
+
+          <!-- Sidebar Toggler (Sidebar) -->
+          <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
           </div>
-        </div>
-      </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-    </ul>
+      </ul>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->

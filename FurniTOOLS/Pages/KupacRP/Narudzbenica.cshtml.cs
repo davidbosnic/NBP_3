@@ -114,8 +114,14 @@ namespace WEBFurniTOOLS.Pages.KupacRP
             {
                 pomk.MojeNarudzbine_ = new List<MongoDBRef>();
             }
+            if (pom2.MojeNarudzbine!=null)
+            {
+                pom2.MojeNarudzbine = new List<MongoDBRef>();
+            }
             pomk.MojeNarudzbine_.Add(new MongoDBRef("mojenarudzbine", Narudzbina.ID));
-            coll5.ReplaceOne(x => x.ID == idk,pomk);
+            //pom2.MojeNarudzbine.Add(new MongoDBRef("mojenarudzbine", Narudzbina.ID));
+            coll5.ReplaceOne(x => x.ID == idk, pomk);
+            //coll2.ReplaceOne(x => x.ID == pom2.ID, pom2);
 
             Console.WriteLine("asdaf");
             return RedirectToPage("./KupacHomePage");

@@ -42,7 +42,7 @@ namespace WEBFurniTOOLS
                 var result = await coll.Find(filter1).ToListAsync();
                 var admin = result.SingleOrDefault();
 
-                Console.WriteLine(admin.Ime + " " + admin.ID);
+                
 
                 if (admin != null && Password == admin.Sifra)
                 {
