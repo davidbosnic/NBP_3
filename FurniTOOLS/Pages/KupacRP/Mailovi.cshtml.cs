@@ -30,7 +30,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -65,7 +65,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         public async Task<IActionResult> OnPostObrisi(string id)
         {
 
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -97,7 +97,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {

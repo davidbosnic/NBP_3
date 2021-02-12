@@ -45,7 +45,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnPostAsync(string id, string prodavac)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -119,16 +119,16 @@ namespace WEBFurniTOOLS.Pages.KupacRP
                 pom2.MojeNarudzbine = new List<MongoDBRef>();
             }
             pomk.MojeNarudzbine_.Add(new MongoDBRef("mojenarudzbine", Narudzbina.ID));
-            //pom2.MojeNarudzbine.Add(new MongoDBRef("mojenarudzbine", Narudzbina.ID));
+            
             coll5.ReplaceOne(x => x.ID == idk, pomk);
-            //coll2.ReplaceOne(x => x.ID == pom2.ID, pom2);
+            
 
             Console.WriteLine("asdaf");
             return RedirectToPage("./KupacHomePage");
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {

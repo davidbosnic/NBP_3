@@ -38,7 +38,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<IActionResult> OnGet(int? pageIndex)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -64,7 +64,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                 narudzbine = await PaginatedList<Narudzbina>.CreateAsync(
                      narudzbineIQ, pageIndex ?? 1, pageSize);
 
-                //narudzbine=_db.Narudzbine.Include(x=>x.NarucenProizvod_.MojProdavac_).Include(x=>x.NarucenStof_.MojiStof_).Where(x=>x.ProfilKorisnika_.ID==idKupac && x.Status!="Korpa").ToList(); 
+                
                 return Page();
             }
             else
@@ -74,7 +74,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -88,7 +88,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -102,7 +102,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {

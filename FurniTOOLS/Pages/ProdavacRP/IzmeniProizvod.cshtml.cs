@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Driver;
-//using Microsoft.Azure.Storage;
-//using Microsoft.Azure.Storage.Blob;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace WEBFurniTOOLS.Pages.ProdavacRP
 {
@@ -28,11 +26,6 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         [BindProperty(SupportsGet=true)]
         public Proizvod proizvodZaIzmenu{get;set;}
 
-        //[BindProperty]
-        //public IFormFile Slika {get;set;}
-
-        //[BindProperty]
-        //public bool PromeniSliku{get;set;}
         [BindProperty]
         public Prodavac Ja { get; set; } 
         public IzmeniProizvodModel(IDatabaseSettings settings)
@@ -41,7 +34,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
             _db = client.GetDatabase(settings.DatabaseName);
             ErrorMessage1 ="";
             ErrorMessage2="";
-            //PromeniSliku=false;
+           
             Ucitano=false;
         }
 
@@ -51,14 +44,14 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPost(string id)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 idProdavac = HttpContext.Session.GetString("idProdavac");
                 Console.WriteLine(id + " " + idProdavac);
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
-                //moracemo ovde verovanto da prosledimo sifru proizvoda posto on nema svoj id jer se ne cuva u zasebnu kolekciju
+                
                 Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
                 foreach (Proizvod p in pom.MojiProizvodi)
                 {
@@ -78,7 +71,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzmeni()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -105,7 +98,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {

@@ -40,12 +40,7 @@
     <input  style="float: right;" type="hidden" asp-for="Proizvod.MojProdavac_.Firma">
     <input  style="float: right;" type="hidden" asp-for="Proizvod.MojProdavac_.Ime">
     <input  style="float: right;" type="hidden" asp-for="Proizvod.MojProdavac_.Prezime">
-@* <div style="display:flex;flex-direction: row;">
-    <div style="display:flex;flex-direction: column; margin-left: 10%; width: 250px;margin-top: 15%;">     
-        <img src="@Model.Proizvod.URLSlike" width="400px" height="300px">
-    </div> *@
 
-    @* <div style="display:flex;flex-direction: column; margin-left: 30%; width: 250px;"> *@
     <div class="container">
             <h1>Moja narudzbina</h1>
      <img src="@Model.Proizvod.URLSlike" class="img-fluid" alt="Responsive image">  
@@ -121,7 +116,7 @@
         <input type="date" id="r1" class="form-control" asp-for="Narudzbina.KrajnjiRokIsporuke" aria-describedby="basic7">
     </div>
 
-    @* <label style="float: right;" >Štof: </label> *@
+    
     <div class="input-group-prepend">
             <span class="input-group-text">Stof : </span>
         </div>
@@ -139,8 +134,7 @@
     }
     </select>
     <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Stavi u korpu" asp-page-handler="StaviUKorpu">
-    @* </div>
-</div> *@
+    
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>

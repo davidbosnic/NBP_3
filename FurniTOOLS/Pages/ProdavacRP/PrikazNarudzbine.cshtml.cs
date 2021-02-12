@@ -27,7 +27,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<IActionResult> OnPost(string id)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -50,7 +50,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<IActionResult> OnPostPrihvati()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -69,7 +69,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<IActionResult> OnPostOdbij()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -87,7 +87,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<IActionResult> OnPostIsporuceno()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -105,7 +105,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {

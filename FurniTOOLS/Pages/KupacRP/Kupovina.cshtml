@@ -30,64 +30,14 @@ input[type=range] {
 <br>
   <form method="POST" class="form-inline">
 <div class="container">
-  @* <div style="justify-content: space-evenly;width: 100%;" class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label id="labeloption1" class="btn btn-secondary">
-      <input type="radio" asp-for="Type" name="Type" id="option1" value="0" > Levi filter
-    </label>
-    <label id="labeloption2" class="btn btn-secondary">
-      <input type="radio" asp-for="Type" name="Type" id="option2"  value="1" > Srednji filter
-    </label>
-    <label id="labeloption3" class="btn btn-secondary">
-      <input type="radio" asp-for="Type" name="Type" id="option3" value="2" > Desni filter
-    </label>
-  </div> *@
+  
   <br>
   <br>
 
   
  
 
-    @* <div style="display: flex;justify-content: space-evenly;width: 100%;"> *@
-    @* <div style="margin-left: 20px;">
-      <label>Izaberite vrstu proizvoda</label>
-      <select id="filter1" aria-placeholder="--- Izaberite ---"  style="width: 300px; height: 100px;" class="js-example-basic-single" asp-for="Search1" asp-items="@Model.ImenaProizvoda">
-      <option value="" selected disabled >--- Izaberite ---</option>
-      </select>
-    </div> *@
-    @* <div style="margin-left: 20px;">
-      <label>Precizna pretraga</label>
-      <select id="filter2" aria-placeholder="--- Izaberite ---" style="width: 300px; height: 100px;" class="js-example-basic-single" asp-for="Search2">
-        <option value="" selected disabled >--- Izaberite ---</option>
-        @if(Model.Prodavci!=null)
-        {
-          foreach (var item in Model.Prodavci)
-          {
-              <optgroup label="@item.Firma - @item.Ime @item.Prezime">
-                @foreach (var i in item.MojiProizvodi)
-                {
-                    <option value="@i.ID">@i.Naziv</option>
-                }
-              </optgroup>
-          }
-        }
-      </select>
-    </div> *@
-    @* <div  style="margin-left: 20px;">
-      <label>Izaberite naziv firme</label>
-      <select  id="filter3" aria-placeholder="--- Izaberite ---" style="width: 300px; height: 100px;" class="js-example-basic-single" asp-for="Search3" asp-items="@Model.ImenaFirmi">
-      <option value="" selected disabled >--- Izaberite ---</option>
-      </select>
-    </div> *@
-
-
-
-    @* <div style="margin-top:15px;margin-left:20px;">
-        <input class="form-control mr-sm-2" type="search" placeholder="Pretrazi prodavca" aria-label="Pretrazi">
-    </div>
-    <div style="margin-top:15px;margin-left:20px;">
-      <button  class="btn btn-warning my-2 my-sm-0" type="submit">Pretrazi</button>
-    </div> *@
-
+   
 
   <div style="display: flex;justify-content: space-evenly;width: 100%;">
         <div class="input-group input-group-sm mb-3">
@@ -113,43 +63,18 @@ input[type=range] {
             <option value="" selected  >--- Izaberite ---</option>
           </select>
         </div>
-  @* <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span id="inputGroup-sizing-sm2" class="input-group-text" for="filter2">Precizna pretraga</span>
-   </div> *@
- 
-    @* <select id="filter2" aria-placeholder="--- Izaberite ---" class="custom-select js-example-basic-single"  asp-for="Search2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm2">
-      <option value="" selected disabled >--- Izaberite ---</option>
-      @if(Model.Prodavci!=null)
-        {
-          foreach (var item in Model.Prodavci)
-          {
-              <optgroup label="@item.Firma - @item.Ime @item.Prezime">
-                @foreach (var i in item.MojiProizvodi)
-                {
-                    <option value="@i.ID">@i.Naziv</option>
-                }
-              </optgroup>
-          }
-        }
-    </select> *@
+  
   </div>
 
 
 
 
 
-    @* </div> *@
+   
     <div class="container">
 
 
-      @* <div style="padding-top: 15px;padding-bottom: 20px;" class="checkbox">
-      <label>
-        Da li zilite opseg cena?        
-      </label>
-      <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="Cena">
-    </div> *@
-
+      
 
 
 
@@ -166,17 +91,7 @@ input[type=range] {
 
 
 
-      @* style="display: flex;justify-content: space-evenly;width: 100%;" *@
-    @* <div style="padding-top: 15px;padding-bottom: 20px;" class="checkbox">
-      <label>
-        Da li zilite opseg cena?        
-      </label>
-      <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="Cena">
-    </div>
-    <label style="margin-top:5px;">OD</label>
-    <input asp-for="CenaOD" style="margin-top:30px;width: 200px; height: 40px; text-align: center;" id="n1" type="number">
-    <label style="margin-top:5px;">DO</label>
-    <input asp-for="CenaDO" style="margin-top:30px;width: 200px; height: 40px;text-align: center;" id="n2" type="number"> *@
+     
 
 
 
@@ -332,7 +247,7 @@ input[type=range] {
 
   </form>
 
-    @* <script>
+    @*<script>
     var rb1 = document.getElementById("option1");
     var rb2 = document.getElementById("option2");
     var rb3 = document.getElementById("option3");
@@ -369,5 +284,5 @@ input[type=range] {
         fl1.disabled=true;
         fl2.disabled=true;
         fl3.disabled=true;
-  </script> *@
+  </script>*@ 
 <hr class="sidebar-divider d-none d-md-block">

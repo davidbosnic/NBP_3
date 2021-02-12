@@ -37,7 +37,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet(int? pageIndex)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -57,7 +57,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                     MojiProizvodi = await PaginatedList<Proizvod>.CreateAsync(
                          new List<Proizvod>().AsQueryable(), pageIndex ?? 1, pageSize);
                 }
-                //MojiProizvodi=_db.Proizvodi.Where(x=>x.MojProdavac_.ID==idProdavac).ToList();
+                
                 return Page();
             }
             else
@@ -68,7 +68,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -82,7 +82,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -96,7 +96,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostObrisiProizvod(string id)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -121,7 +121,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {

@@ -26,24 +26,7 @@
         <div>@Model.ErrorMessage1</div>
         <div>@Model.ErrorMessage2</div>
 
-        @* <label style="float: right;" >Naziv: </label>
-        <input style="float: right;"  type="text" asp-for="proizvodZaIzmenu.Naziv">
-        <label style="float: right;" >Šifra proizvoda: </label>
-        <input style="float: right;"  type="text" asp-for="proizvodZaIzmenu.Sifra">
-        <label style="float: right;" >Povrsina pod štofom: </label>
-        <input style="float: right;" step="any"  type="number" asp-for="proizvodZaIzmenu.PovrsinaMaterijala">
-        <label style="float: right;">Visina baze: </label>
-        <input style="float: right;"  type="number" asp-for="proizvodZaIzmenu.VisinaBaze">
-        <label style="float: right;" >Visina naslona: </label>
-        <input style="float: right;"  type="number" asp-for="proizvodZaIzmenu.VisinaNaslona">
-        <label style="float: right;" >Cena po komadu: </label>
-        <input style="float: right;"  type="number" asp-for="proizvodZaIzmenu.CenaPoKomadu">
-
-        <label style="float: right;" >Promeni sliku ?</label>
-        <input style="float: right;"  type="checkbox" asp-for="PromeniSliku"> *@
-
-        @* <label  style="float: right;" >Slika proizvoda: </label>
-        <input class="btn btn-warning" style="float: right;"  type="file" asp-for="Slika"> *@
+        
 
         <input style="float: right;" type="hidden" asp-for="Ja.ID">
         <input style="float: right;" type="hidden" asp-for="Ja.Ime">
@@ -62,12 +45,7 @@
             <input type="text" class="form-control" asp-for="proizvodZaIzmenu.Naziv" aria-describedby="basic1">
         </div>
 
-        @*<div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic2">Šifra proizvoda : </span>
-            </div>
-            <input type="text" class="form-control" asp-for="proizvodZaIzmenu.Sifra"  aria-describedby="basic2">
-        </div>*@
+       
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -100,12 +78,7 @@
             <input class="form-control" type="number" asp-for="proizvodZaIzmenu.CenaPoKomadu" aria-describedby="basic6">
         </div>
 
-        @*<div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic7">Promeni sliku ? </span>
-            </div>
-            <input id="cena"type="checkbox" data-toggle="toggle" data-onstyle="warning" data-style="slow" data-offstyle="danger" asp-for="PromeniSliku" aria-describedby="basic7">
-        </div>*@
+        
 
         <div style="margin-top: 10px" class="input-group mb-3">
             <div class="input-group-prepend">
@@ -114,14 +87,7 @@
             <input type="text" class="form-control" asp-for="proizvodZaIzmenu.URLSlike" aria-describedby="basic1">
         </div>
 
-        @*<script>
-            $('#inputGroupFile01').on('change',function(){
-                //get the file name
-                var fileName = $(this).val().replace('C:\\fakepath\\', " ");
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            })
-        </script>*@
+       
 
         <input style="margin-top: 20px;float: right;" class="btn btn-warning" type="submit" asp-page-handler="Izmeni" value="Izmeni proizvod">
 

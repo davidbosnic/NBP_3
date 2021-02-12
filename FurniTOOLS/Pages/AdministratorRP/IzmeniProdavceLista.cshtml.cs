@@ -37,7 +37,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<IActionResult> OnGet(int? pageIndex)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -52,7 +52,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
                 pageSize = Convert.ToInt32(HttpContext.Session.GetString("pageSize"));
                 Prodavci = await PaginatedList<Prodavac>.CreateAsync(
                      prodavciIQ, pageIndex ?? 1, pageSize);
-                //Kupci=  _db.Kupci.ToList();
+                
                 return Page();
             }
             else
@@ -63,7 +63,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
 
          public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -77,7 +77,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -91,7 +91,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostObrisiProdavca(string id)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -111,7 +111,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {

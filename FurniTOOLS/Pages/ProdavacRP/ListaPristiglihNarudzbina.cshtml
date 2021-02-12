@@ -37,8 +37,7 @@
                    class="btn btn-primary @nextDisabled">Sledeca</a><br>
                 <span><input style="padding-top:10px;margin-left:10px;padding-right:10px;margin-top:10px" type="range" class="custom-range" asp-for="pageInput" id="pageInputId" value=@Model.narudzbine.PageIndex min="1" max=@Model.narudzbine.TotalPages oninput="pageOutputId.value= pageInputId.value "></span>
                 <output style="margin-top:10px" name="pageOutput" id="pageOutputId">@Model.narudzbine.PageIndex</output>
-                @* <a asp-page="./MojiProizvodi" asp-route-pageIndex="pageOutputId.value"
-                    class="btn btn-primary ">Idi na stranu</a> *@
+                
                 <span><input style="margin-left:10px;margin-top:5px" type="submit" class="btn btn-primary" value="-> Idi na odabranu stranicu" asp-page-handler="IdiNaStranu"></span>
                 <br>
                 <div style="margin-top:10px;margin-bottom:10px">

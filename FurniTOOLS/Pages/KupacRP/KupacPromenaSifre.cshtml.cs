@@ -12,8 +12,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 {
     public class KupacPromenaSifreModel : PageModel
     {
-        // [BindProperty]
-        // public Kupac Ja { get; set; }
+        
        public bool Ucitano { get; set; }
         private readonly IMongoDatabase _db;
         [BindProperty(SupportsGet=true)]
@@ -45,14 +44,14 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 
         public async Task<ActionResult> OnGet()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
                 idKupac = HttpContext.Session.GetString("idKupac");
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 kupacZaIzmenu = coll.Find(x => x.ID == idKupac.ToString()).SingleOrDefault();
-                //Ja=_db.Kupci.Where(x=>x.ID==idKupac).SingleOrDefault();
+                
 
                 return Page();
             }
@@ -65,7 +64,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         public async Task<ActionResult> OnPostIzmeni()
         {
             Ucitano = true;
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -106,7 +105,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {

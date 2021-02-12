@@ -39,7 +39,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -85,7 +85,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 
             var coll2 = _db.GetCollection<Narudzbina>("Narudzbine");
 
-            //verovatno ce onda treba i dbref koji kupac cuva da se brise, trebe se proveri
+            
             coll2.DeleteOne(x => x.ID == id.ToString());
             
 
@@ -94,7 +94,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnPostKupi()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -136,7 +136,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {

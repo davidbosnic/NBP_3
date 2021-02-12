@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Driver;
-//using Microsoft.Azure.Storage;
-//using Microsoft.Azure.Storage.Blob;
+
 
 namespace WEBFurniTOOLS.Pages.ProdavacRP
 {
@@ -21,8 +20,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public string idProdavac{get;set;}
 
-        //[BindProperty]
-        //public IFormFile SlikaStofa{get;set;}
+        
 
         [BindProperty(SupportsGet=true)]
         public Stof stofZaDodavanje{get;set;}
@@ -57,7 +55,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnGet()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -65,7 +63,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Ja = coll.Find(x=>x.ID==idProdavac.ToString()).SingleOrDefault();
 
-                //noviProizvod.MojProdavac= new MongoDBRef("mojprodavac", idProdavac.ToString());
+                
                 return Page();
             }
             else
@@ -76,7 +74,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public async Task<ActionResult> OnPostPrimeniAsync()
         {
             Console.WriteLine(brojTipova);
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -100,7 +98,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostDodajAsync()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -131,7 +129,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {

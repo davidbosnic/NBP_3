@@ -32,12 +32,12 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<ActionResult> OnGet()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 idProdavac = HttpContext.Session.GetString("idProdavac");
-                //Ja=_db.Prodavci.Where(x=>x.ID==idProdavac).SingleOrDefault();
+                
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
           
                 prodavacZaIzmenu = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
@@ -57,7 +57,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public async Task<ActionResult> OnPostIzmeni()
         {
             Ucitano = true;
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -81,6 +81,10 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                     
                         ErrorMessage = "";
                     var coll = _db.GetCollection<Prodavac>("Prodavci");
+                    Prodavac pom = coll.Find(x => x.ID == idProdavac.ToString()).SingleOrDefault();
+                    prodavacZaIzmenu.MojiStofovi = pom.MojiStofovi;
+                    prodavacZaIzmenu.MojiProizvodi = pom.MojiProizvodi;
+                    prodavacZaIzmenu.MojeNarudzbine = pom.MojeNarudzbine;
                     coll.ReplaceOne(x => x.ID == idProdavac.ToString(),prodavacZaIzmenu);
 
                         HttpContext.Session.SetString("imeProdavca", prodavacZaIzmenu.Ime);
@@ -98,7 +102,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {

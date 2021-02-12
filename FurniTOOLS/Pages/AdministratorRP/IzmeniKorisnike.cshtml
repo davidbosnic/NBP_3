@@ -17,22 +17,7 @@
 }
 </style>
 <form  method="POST">
-    @* <input type="hidden" asp-for="noviKupac.ID">
-    <div  style="text-align: center;" id="sakriven" asp-validation-summary="All"></div>
-    <div  style="text-align: center;">@Model.ErrorMessage</div>
-    <div style="display: flex;">
-        <div><div class="divce">Ime :</div><div class="divce">Prezime :</div><div class="divce">Email :</div><div class="divce">Broj telefona :</div><div class="divce">Adresa :</div><div class="divce">Grad :</div></div>
-        <div>
-            <div class="divce2"><input type="text" asp-for="noviKupac.Ime"></div>
-            <div class="divce2"><input type="text" asp-for="noviKupac.Prezime"></div>    
-            <div class="divce2"><input type="mail" asp-for="noviKupac.Email"></div>   
-            <div class="divce2"><input type="tel" asp-for="noviKupac.BrojTelefona"></div>    
-            <div class="divce2"><input type="text" asp-for="noviKupac.Adresa"></div>
-            <div class="divce2"><input type="text" asp-for="noviKupac.Grad"></div>
-            <div class="divce2"><input type="hidden" asp-for="noviKupac.Sifra"></div> 
-        </div> 
-   </div> 
-   <input class="btn btn-warning" type="submit" value="Izmeni kupca" asp-page-handler="Izmeni"> *@
+    
    <div class="container">
             <h1>Profil kupca za izmenu</h1>
      
@@ -63,12 +48,7 @@
         <input type="email" class="form-control" asp-for="noviKupac.Email"  aria-describedby="basic3">
     </div>
 
-    @* <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic33">Šifra : </span>
-        </div>
-        <input type="password" class="form-control" asp-for="noviKupac.Sifra"  aria-describedby="basic33">
-    </div> *@
+    
 
     <input style="float: right;"  type="hidden" asp-for="noviKupac.Sifra">
 

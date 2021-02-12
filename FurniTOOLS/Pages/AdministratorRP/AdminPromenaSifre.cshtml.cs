@@ -42,13 +42,13 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
 
         public async Task<ActionResult> OnGet()
         {
-            string idLog;
+            
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
                 idAdmin = HttpContext.Session.GetString("idAdmin");
                 var coll = _db.GetCollection<Administrator>("Admins");
-                //Ja=_db.Kupci.Where(x=>x.ID==idKupac).SingleOrDefault();
+                
                 Admin = coll.Find(x=>x.ID==idAdmin.ToString()).SingleOrDefault();
                 return Page();
             }
@@ -61,7 +61,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         public async Task<ActionResult> OnPostIzmeni()
         {
             Ucitano = true;
-            string idLog;
+            
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -85,7 +85,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
                     ErrorMessage = "";
                     Admin = coll.Find(x => x.ID == idAdmin.ToString()).SingleOrDefault();
                     Admin.Sifra = novaSifra;
-                    //ovo je valjda update nisam siguran
+                    
                     coll.ReplaceOne(x => x.ID == Admin.ID, Admin);
                     return RedirectToPage("./AdminHomePage");
                 }
@@ -104,7 +104,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
 
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+          
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {

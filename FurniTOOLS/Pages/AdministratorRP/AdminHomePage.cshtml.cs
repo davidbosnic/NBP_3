@@ -34,7 +34,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnGet()
         {
-            string idLog;
+            
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -45,7 +45,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
                 var coll1 = _db.GetCollection<Prodavac>("Prodavci");
                 var filter1 = Builders<Prodavac>.Filter.Where(x=>x.Verifikovan==false);
                 var filter2= Builders<Prodavac>.Filter.Where(x => x.Verifikovan == true);
-                //nzm kako drugacije da napravim neutralan filter
+                
                 var filter3 = Builders<Administrator>.Filter.Where(x => true);
                 var filter4 = Builders<Kupac>.Filter.Where(x => true);
                 var coll2 = _db.GetCollection<Kupac>("Kupci");
@@ -66,7 +66,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostObrisiProdavca(string id)
         {
-            string idLog;
+            
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -88,7 +88,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+  
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {

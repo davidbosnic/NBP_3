@@ -52,7 +52,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<IActionResult> OnGet(int? pageIndex)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -125,7 +125,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
 
         public async Task<ActionResult> OnPostIdiNaStranu()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -144,7 +144,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostBrojElemenataNaStrani(int brEl)
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {
@@ -184,7 +184,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idKupac"));
             if (log)
             {

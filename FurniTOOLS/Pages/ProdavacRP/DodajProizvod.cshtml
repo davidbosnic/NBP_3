@@ -12,7 +12,7 @@
 }
 <style>
         h1{
-        @* margin-left: 40%; *@
+        
         margin-top: 5%;
     }
 </style>
@@ -81,26 +81,11 @@
         </div>
 
         
-        @*<script>
-            $('#inputGroupFile01').on('change',function(){
-                //get the file name
-                var fileName = $(this).val().replace('C:\\fakepath\\', " ");
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            })
-        </script>*@
-
-
-        @* <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic7">Slika proizvoda : </span>
-            </div>
-            <input type="file" asp-for="Slika" id="r1" class="form-control" aria-describedby="basic7">
-        </div>   *@
+       
         <input class="btn btn-warning" type="hidden" asp-for=nebitno value="bezveze">
         <input class="btn btn-warning" style="margin-top: 10px;float: right;" class="btn btn-warning" type="submit" asp-page-handler="Dodaj" value="Dodaj proizvod">
     </div>
-    @* </div> *@
+    
 </form>
 
     @if(@Model.Ucitano==false)

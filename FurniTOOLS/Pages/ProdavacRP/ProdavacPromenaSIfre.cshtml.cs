@@ -48,12 +48,12 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
 
         public async Task<ActionResult> OnGet()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
                 idProdavac = HttpContext.Session.GetString("idProdavac");
-                //Ja=_db.Prodavci.Where(x=>x.ID==idProdavac).SingleOrDefault();
+                
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 prodavacZaIzmenu = coll.Find(x => x.ID == idProdavac.ToString()).SingleOrDefault();
                 Console.WriteLine(prodavacZaIzmenu.Ime);
@@ -68,7 +68,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         public async Task<ActionResult> OnPostIzmeni()
         {
             Ucitano = true;
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {
@@ -102,7 +102,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+             
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idProdavac"));
             if (log)
             {

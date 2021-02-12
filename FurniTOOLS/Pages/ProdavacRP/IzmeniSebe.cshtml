@@ -14,87 +14,69 @@
 <form method="POST">
     <input type="hidden" asp-for="prodavacZaIzmenu.ID">
     <input type="hidden" asp-for="prodavacZaIzmenu.Email">
-    @* <div style="display:flex;flex-direction: column; margin-left: 40%; width: 250px;">
-    <div id="sakriven" asp-validation-summary="All"></div>
-    <div>@Model.ErrorMessage</div>
-    <label style="float: right;">Ime :</label>
-    <input style="float: right;" type="text" asp-for="prodavacZaIzmenu.Ime">
-    <label style="float: right;">Prezime :</label>
-    <input style="float: right;" type="text" asp-for="prodavacZaIzmenu.Prezime">
-    <label style="float: right;">Email :</label>
-    <input style="float: right;" type="email" asp-for="prodavacZaIzmenu.Email" disabled>
-    <input style="float: right;" type="hidden" asp-for="prodavacZaIzmenu.Sifra">
-    <label style="float: right;">Broj telefona :</label>
-    <input style="float: right;" type="text" asp-for="prodavacZaIzmenu.BrojTelefona">
-    <label style="float: right;">Adresa :</label>
-    <input style="float: right;" type="text" asp-for="prodavacZaIzmenu.Adresa">
-    <label style="float: right;">Grad :</label>
-    <input style="float: right;" type="text" asp-for="prodavacZaIzmenu.Grad">
-    <label style="float: right;">Firma :</label>
-    <input style="float: right;" type="text" asp-for="prodavacZaIzmenu.Firma">
-    <input style="float: right;margin-top: 10px;" class="btn btn-warning" type="submit" value="Izmenite vase podatke" asp-page-handler="Izmeni">
-    </div> *@
+    
 
     <div class="container">
-            <h1>Moj profil</h1>
-     
-     <div></div> 
+        <h1>Moj profil</h1>
 
-    <div id="sakriven" asp-validation-summary="All"></div>
-    <div>@Model.ErrorMessage</div>  
+        <div></div>
 
-    <div style="margin-top: 10px" class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic1">Ime : </span>
+        <div id="sakriven" asp-validation-summary="All"></div>
+        <div>@Model.ErrorMessage</div>
+
+        <div style="margin-top: 10px" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic1">Ime : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Ime" aria-describedby="basic1">
         </div>
-        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Ime"  aria-describedby="basic1">
-    </div>
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic2">Prezime : </span>
-        </div>
-        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Prezime"  aria-describedby="basic2">
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic3">Email : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic2">Prezime : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Prezime" aria-describedby="basic2">
         </div>
-        <input type="email" class="form-control" asp-for="prodavacZaIzmenu.Email"  aria-describedby="basic3" disabled>
-    </div>
 
-    <input style="float: right;"  type="hidden" asp-for="prodavacZaIzmenu.Sifra">
-    <input style="float: right;"  type="hidden" asp-for="prodavacZaIzmenu.Verifikovan">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic4">Broj telefona :</span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic3">Email : </span>
+            </div>
+            <input type="email" class="form-control" asp-for="prodavacZaIzmenu.Email" aria-describedby="basic3" disabled>
         </div>
-        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.BrojTelefona"  aria-describedby="basic4" >
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic5">Adresa : </span>
+        <input style="float: right;" type="hidden" asp-for="prodavacZaIzmenu.Sifra">
+        <input style="float: right;" type="hidden" asp-for="prodavacZaIzmenu.Verifikovan">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic4">Broj telefona :</span>
+            </div>
+            <input type="text" class="form-control" asp-for="prodavacZaIzmenu.BrojTelefona" aria-describedby="basic4">
         </div>
-        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Adresa"  aria-describedby="basic5" >
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic6">Grad : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic5">Adresa : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Adresa" aria-describedby="basic5">
         </div>
-        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Grad" aria-describedby="basic6">
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic7">Firma : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic6">Grad : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Grad" aria-describedby="basic6">
         </div>
-        <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Firma" aria-describedby="basic7">
-    </div>
 
-  <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Izmenite vase podatke" asp-page-handler="Izmeni">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic7">Firma : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="prodavacZaIzmenu.Firma" aria-describedby="basic7">
+        </div>
+        
+
+        <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Izmenite vase podatke" asp-page-handler="Izmeni">
 
     </div>
 

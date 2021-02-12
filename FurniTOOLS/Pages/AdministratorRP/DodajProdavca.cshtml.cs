@@ -36,7 +36,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnGet()
         {
-            string idLog;
+           
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -53,7 +53,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostDodaj()
         {
-            string idLog;
+            
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {
@@ -88,7 +88,7 @@ namespace WEBFurniTOOLS.Pages.AdministratorRP
         }
         public async Task<ActionResult> OnPostIzlogujSe()
         {
-            string idLog;
+            
             bool log = !string.IsNullOrEmpty(HttpContext.Session.GetString("idAdmin"));
             if (log)
             {

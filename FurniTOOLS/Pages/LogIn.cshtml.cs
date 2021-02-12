@@ -27,7 +27,7 @@ namespace WEBFurniTOOLS
         {
             var client = new MongoClient(settings.ConnectionString);
             _db = client.GetDatabase(settings.DatabaseName);
-            //_db = database.GetCollection<Administrator>(settings.AdminsCollectionName);
+           
             Message ="";
         }
         public async Task<IActionResult> OnPostLogin()
@@ -37,7 +37,7 @@ namespace WEBFurniTOOLS
             {
                 var coll = _db.GetCollection<Administrator>("Admins");
                 var filter1 = (Builders<Administrator>.Filter.Eq(x => x.Mail, Email) & Builders<Administrator>.Filter.Eq(x => x.Sifra, Password));
-                //var filter2 = Builders<Administrator>.Filter.Eq("sifra", Password);
+                
 
                 var result = await coll.Find(filter1).ToListAsync();
                 var admin = result.SingleOrDefault();
@@ -67,7 +67,7 @@ namespace WEBFurniTOOLS
             {
                 var coll = _db.GetCollection<Kupac>("Kupci");
                 var filter1 = (Builders<Kupac>.Filter.Eq(x => x.Email, Email) & Builders<Kupac>.Filter.Eq(x => x.Sifra, Password));
-                //var filter2 = Builders<Administrator>.Filter.Eq("sifra", Password);
+               
 
                 var result = await coll.Find(filter1).ToListAsync();
                 var kupac = result.SingleOrDefault();
@@ -91,7 +91,7 @@ namespace WEBFurniTOOLS
             {
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 var filter1 = (Builders<Prodavac>.Filter.Eq(x => x.Email, Email) & Builders<Prodavac>.Filter.Eq(x => x.Sifra, Password));
-                //var filter2 = Builders<Administrator>.Filter.Eq("sifra", Password);
+               
 
                 var result = await coll.Find(filter1).ToListAsync();
                 var prodavac = result.SingleOrDefault();

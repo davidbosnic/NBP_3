@@ -13,7 +13,6 @@ using System.ComponentModel.DataAnnotations.Schema;
     public string ID { get; set; }
     [BsonElement("sifrastofa")]
     public string SifraStofa { get; set; }
-    //potencijalno i ovo treba se obrise
-    [BsonIgnore]
-    public Stof MojiStof_ { get; set; }
+
+    
     }

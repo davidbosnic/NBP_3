@@ -17,23 +17,7 @@
 }
 </style>
 <form  method="POST">
-    @* <input type="hidden" asp-for="prodavacZaIzmenu.ID">
-    <div   style="text-align: center;"id="sakriven" asp-validation-summary="All"></div>
-    <div  style="text-align: center;">@Model.ErrorMessage</div>
-    <div style="display: flex;">
-        <div><div class="divce">Ime :</div><div class="divce">Prezime :</div><div class="divce">Email :</div><div class="divce">Broj telefona :</div><div class="divce">Adresa :</div><div class="divce">Grad :</div><div class="divce">Firma :</div></div>
-        <div>
-            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Ime"></div>
-            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Prezime"></div>    
-            <div class="divce2"><input type="mail" asp-for="prodavacZaIzmenu.Email"></div>  
-            <div class="divce2"><input type="tel" asp-for="prodavacZaIzmenu.BrojTelefona"></div>    
-            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Adresa"></div>
-            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Grad"></div>
-            <div class="divce2"><input type="text" asp-for="prodavacZaIzmenu.Firma"></div>
-            <div class="divce2"><input type="hidden" asp-for="prodavacZaIzmenu.Sifra"></div>  
-        </div> 
-   </div> 
-   <input class="btn btn-warning" type="submit" value="Izmeni prodavca" asp-page-handler="Izmeni"> *@
+    
 
     <div class="container">
             <h1>Profil prodavca za izmenu</h1>
