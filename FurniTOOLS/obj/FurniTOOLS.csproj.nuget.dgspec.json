@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Begota\\Documents\\GitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj": {}
+    "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Begota\\Documents\\GitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj": {
+    "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Begota\\Documents\\GitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj",
+        "projectUniqueName": "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj",
         "projectName": "FurniTOOLS",
-        "projectPath": "C:\\Users\\Begota\\Documents\\GitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj",
-        "packagesPath": "C:\\Users\\Begota\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Begota\\Documents\\GitHub\\NBP_3\\FurniTOOLS\\obj\\",
+        "projectPath": "E:\\gitHub\\NBP_3\\FurniTOOLS\\FurniTOOLS.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "E:\\gitHub\\NBP_3\\FurniTOOLS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Begota\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -74,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

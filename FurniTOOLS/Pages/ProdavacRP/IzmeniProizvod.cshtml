@@ -26,7 +26,7 @@
         <div>@Model.ErrorMessage1</div>
         <div>@Model.ErrorMessage2</div>
 
-        
+
 
         <input style="float: right;" type="hidden" asp-for="Ja.ID">
         <input style="float: right;" type="hidden" asp-for="Ja.Ime">
@@ -38,6 +38,7 @@
         <input style="float: right;" type="hidden" asp-for="Ja.Grad">
         <input style="float: right;" type="hidden" asp-for="Ja.Firma">
         <input style="float: right;" type="hidden" asp-for="Ja.Verifikovan">
+        <input style="float: right;" type="hidden" asp-for="proizvodZaIzmenu.Sifra">
         <div style="margin-top: 10px" class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic1">Naziv : </span>
@@ -45,7 +46,7 @@
             <input type="text" class="form-control" asp-for="proizvodZaIzmenu.Naziv" aria-describedby="basic1">
         </div>
 
-       
+
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -78,7 +79,7 @@
             <input class="form-control" type="number" asp-for="proizvodZaIzmenu.CenaPoKomadu" aria-describedby="basic6">
         </div>
 
-        
+
 
         <div style="margin-top: 10px" class="input-group mb-3">
             <div class="input-group-prepend">
@@ -87,7 +88,7 @@
             <input type="text" class="form-control" asp-for="proizvodZaIzmenu.URLSlike" aria-describedby="basic1">
         </div>
 
-       
+
 
         <input style="margin-top: 20px;float: right;" class="btn btn-warning" type="submit" asp-page-handler="Izmeni" value="Izmeni proizvod">
 

@@ -34,9 +34,7 @@ E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\scopedcss\bundle\FurniTOOLS.styles.c
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.TagHelpers.input.cache
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.TagHelpers.output.cache
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.RazorCoreGenerate.cache
-E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Aboutus.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\AdminHomePage.cshtml.g.cs
-E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\AdministratorRP.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\AdminPromenaSifre.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\DodajKorisnike.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\DodajProdavca.cshtml.g.cs
@@ -47,7 +45,6 @@ E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\IzmeniPr
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\IzmeniSebe.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\ValidacijaProdavaca.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\AdministratorRP\ValidacijaProdavacaLista.cshtml.g.cs
-E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\KupacRP\Istorija.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\KupacRP\IzmeniSebe.cshtml.g.cs
@@ -58,18 +55,15 @@ E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\KupacRP\Kupovina.cshtml.
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\KupacRP\Mailovi.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\KupacRP\Narudzbenica.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\LogIn.cshtml.g.cs
-E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Privacy.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\DodajProizvod.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\DodajStof.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\IzmeniProizvod.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\IzmeniSebe.cshtml.g.cs
-E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\IzmeniStof.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\MojiProizvodi.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\MojiStofovi.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\ProdavacHomePage.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\ProdavacPromenaSifre.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Shared\_Layout.cshtml.g.cs
-E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Shared\_LayoutAdministrator.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Shared\_LayoutGlavna.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Shared\_LayoutKupac.cshtml.g.cs
 E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\Shared\_LayoutNovi.cshtml.g.cs
@@ -174,3 +168,5 @@ C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.cs
 C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\FurniTOOLS.genruntimeconfig.cache
 C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\ListaPristiglihNarudzbina.cshtml.g.cs
 C:\Users\Begota\Documents\GitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\PrikazNarudzbine.cshtml.g.cs
+E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\ListaPristiglihNarudzbina.cshtml.g.cs
+E:\gitHub\NBP_3\FurniTOOLS\obj\Debug\net5.0\Razor\Pages\ProdavacRP\PrikazNarudzbine.cshtml.g.cs

@@ -82,7 +82,7 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                 var coll = _db.GetCollection<Prodavac>("Prodavci");
                 Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
                 proizvodZaIzmenu.MojProdavac = new MongoDBRef("mojprodavac", idProdavac.ToString());
-                for (int i=0;i<=pom.MojiProizvodi.Count;i++)
+                for (int i=0;i<=pom.MojiProizvodi.Count-1;i++)
                 {
                     if (pom.MojiProizvodi[i].Sifra==proizvodZaIzmenu.Sifra)
                     {
