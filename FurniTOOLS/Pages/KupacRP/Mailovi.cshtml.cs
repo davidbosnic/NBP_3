@@ -48,6 +48,7 @@ namespace WEBFurniTOOLS.Pages.KupacRP
                         Narudzbina npom = coll2.Find(filter).SingleOrDefault();
                         if (npom.Status != "Korpa")
                         {
+                            npom.ProfilKorisnika_ = Ja;
                             pom.Add(npom);
                         }
                     }

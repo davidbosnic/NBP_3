@@ -42,122 +42,131 @@
     <input  style="float: right;" type="hidden" asp-for="Proizvod.MojProdavac_.Prezime">
 
     <div class="container">
-            <h1>Moja narudzbina</h1>
-     <img src="@Model.Proizvod.URLSlike" class="img-fluid" alt="Responsive image">  
-     <div></div> 
+        <h1>Moja narudzbina</h1>
+        <img src="@Model.Proizvod.URLSlike" class="img-fluid" alt="Responsive image">
+        <div></div>
 
-    <div id="sakriven" asp-validation-summary="All"></div>
-    <div>@Model.ErrorMessage</div>  
+        <div id="sakriven" asp-validation-summary="All"></div>
+        <div>@Model.ErrorMessage</div>
 
-    <div style="margin-top: 10px" class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic1">Naziv proizvoda : </span>
+        <div style="margin-top: 10px" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic1">Naziv proizvoda : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="Proizvod.Naziv" aria-describedby="basic1" disabled>
         </div>
-        <input type="text" class="form-control" asp-for="Proizvod.Naziv"  aria-describedby="basic1" disabled>
-    </div>
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic2">Firma : </span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic2">Firma : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="Proizvod.MojProdavac_.Firma" aria-describedby="basic2" disabled>
         </div>
-        <input type="text" class="form-control" asp-for="Proizvod.MojProdavac_.Firma"  aria-describedby="basic2" disabled>
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic3">Ime vlasnika : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic3">Ime vlasnika : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="Proizvod.MojProdavac_.Ime" aria-describedby="basic3" disabled>
         </div>
-        <input type="text" class="form-control" asp-for="Proizvod.MojProdavac_.Ime"  aria-describedby="basic3" disabled>
-    </div>
 
 
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic333">Visina baze : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic333">Visina baze : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="Proizvod.VisinaBaze" aria-describedby="basic333" disabled>
+        </div>    <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic3333">Visina naslona : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="Proizvod.VisinaNaslona" aria-describedby="basic3333" disabled>
         </div>
-        <input type="text" class="form-control" asp-for="Proizvod.VisinaBaze"  aria-describedby="basic333" disabled>
-    </div>    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic3333">Visina naslona : </span>
+
+
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic4">Prezime vlasnika : </span>
+            </div>
+            <input type="text" class="form-control" asp-for="Proizvod.MojProdavac_.Prezime" aria-describedby="basic4" disabled>
         </div>
-        <input type="text" class="form-control" asp-for="Proizvod.VisinaNaslona"  aria-describedby="basic3333" disabled>
-    </div>
 
+        <input style="float: right;" type="hidden" value="Korpa" asp-for="Narudzbina.Status">
 
-
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic4">Prezime vlasnika : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic5">Kolicina : </span>
+            </div>
+            <input type="number" class="form-control" asp-for="Narudzbina.Kolicina" value="1" min="1" aria-describedby="basic5">
         </div>
-        <input type="text" class="form-control" asp-for="Proizvod.MojProdavac_.Prezime"  aria-describedby="basic4" disabled>
-    </div>
 
-    <input  style="float: right;" type="hidden" value="Korpa" asp-for="Narudzbina.Status">
-
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic5">Kolicina : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic6">Rok potvrde : </span>
+            </div>
+            <input type="date" id="r2" class="form-control" asp-for="Narudzbina.RokZaPotvrdu" aria-describedby="basic6">
         </div>
-        <input type="number" class="form-control" asp-for="Narudzbina.Kolicina" value="1" min="1"  aria-describedby="basic5" >
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic6">Rok potvrde : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic7">Krajnji rok isporuke : </span>
+            </div>
+            <input type="date" id="r1" class="form-control" asp-for="Narudzbina.KrajnjiRokIsporuke" aria-describedby="basic7">
         </div>
-        <input type="date" id="r2" class="form-control" asp-for="Narudzbina.RokZaPotvrdu" aria-describedby="basic6">
-    </div>
 
-    <div class="input-group mb-3">
+
         <div class="input-group-prepend">
-            <span class="input-group-text" id="basic7">Krajnji rok isporuke : </span>
-        </div>
-        <input type="date" id="r1" class="form-control" asp-for="Narudzbina.KrajnjiRokIsporuke" aria-describedby="basic7">
-    </div>
-
-    
-    <div class="input-group-prepend">
             <span class="input-group-text">Stof : </span>
         </div>
-    <select id="id_select2_example" aria-placeholder="--- Izaberite ---" style="width: 300px; height: 100px;" asp-for="@Model.IzabraniStofID">
-    @if(Model.Stofovi!=null && Model.Stofovi.Count!=0)
-    {
-        foreach (var item in Model.Stofovi)
-        {
-            @if (item.MojiTipovi != null && item.MojiTipovi.Count != 0)
-            @foreach (var i in item.MojiTipovi)
+        <select id="id_select2_example" aria-placeholder="--- Izaberite ---" style="width: 100%; height: 100px;" asp-for="@Model.IzabraniStofID">
+            @if (Model.Stofovi != null && Model.Stofovi.Count != 0)
             {
-                <option data-img_src="@item.URLSlike" value="@item.Naziv @i.SifraStofa">@item.Naziv - @i.SifraStofa</option>
-            }         
-        }
-    }
-    </select>
-    <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Stavi u korpu" asp-page-handler="StaviUKorpu">
-    
+                foreach (var item in Model.Stofovi)
+                {
+                    @if (item.MojiTipovi != null && item.MojiTipovi.Count != 0)
+                        @foreach (var i in item.MojiTipovi)
+                        {
+                            <option data-img_src="@item.URLSlike" value="@item.Naziv @i.SifraStofa">@item.Naziv - @i.SifraStofa</option>
+                        }
+                    }
+                }
+        </select>
+        <input style="float: right; margin-top: 10px;" type="submit" class="btn btn-warning" value="Stavi u korpu" asp-page-handler="StaviUKorpu">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
-<script type="text/javascript">
-    function custom_template(obj){
-            var data = $(obj.element).data();
-            var text = $(obj.element).text();
-            if(data && data['img_src']){
-                img_src = data['img_src'];
-                template = $("<div><img src=\"" + img_src + "\" style=\"width:100%;height:150px;\"/><p style=\"font-weight: 700;font-size:14pt;text-align:center;\">" + text + "</p></div>");
-                return template;
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+        <script type="text/javascript">
+            function custom_template(obj) {
+                var data = $(obj.element).data();
+                var text = $(obj.element).text();
+                if (data && data['img_src']) {
+                    img_src = data['img_src'];
+                    template = $("<div><img src=\"" + img_src + "\" style=\"width:100%;\"\"/><p style=\"font-weight: 700;font-size:14pt;text-align:center;\">" + text + "</p></div>");
+                    return template;
+                }
             }
-        }
-    var options = {
-        'templateSelection': custom_template,
-        'templateResult': custom_template,
-    }
-    $('#id_select2_example').select2(options);
-    $('.select2-container--default .select2-selection--single').css({'height': '220px'});
+            var options = {
+                'templateSelection': custom_template,
+                'templateResult': custom_template,
+            }
+            $('#id_select2_example').select2(options);
+            $('.select2-container--default .select2-selection--single').css({ 'height': 'auto' });
+            $(".id_select2_example").select2({
+                width: 'resolve' 
+            });
+        </script>
+        <style>
+            .select2-results, .select2-results__options {
+                height: auto !important;
+                max-height: 500px !important;
+            }
+        </style>
+        
 
-</script>
-
-
+    </div>
 </form>
     <script>
         var r1=document.getElementById("r1");
@@ -203,3 +212,4 @@
     </script>
     Model.Ucitano=true;
     }
+    

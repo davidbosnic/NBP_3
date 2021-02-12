@@ -111,11 +111,13 @@ namespace WEBFurniTOOLS.Pages.ProdavacRP
                          Prodavac pom = coll.Find(x=>x.ID== idProdavac.ToString()).FirstOrDefault();
                         stofZaDodavanje.MojiTipovi = tipoviZaDodavanje.ToList();
                         stofZaDodavanje.Prodavac_ = new MongoDBRef("mojprodavac", idProdavac.ToString());
+                stofZaDodavanje.Naziv = stofZaDodavanje.Naziv.Replace(" ", "_");
                 if (pom.MojiStofovi == null)
                 {
                     pom.MojiStofovi = new List<Stof>();
                 }
                 pom.MojiStofovi.Add(stofZaDodavanje);
+
 
                         coll.ReplaceOne(x => x.ID == idProdavac.ToString(), pom);
 
